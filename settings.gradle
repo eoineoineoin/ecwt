@@ -1,0 +1,2 @@
+rootProject.name='Ecwt'
+include ':app'

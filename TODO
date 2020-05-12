@@ -1,0 +1,18 @@
+Basic:
+* Multithreaded sounder
+* Correct tone length calculation
+* Settings
+
+* Koch lesson select
+* Run a koch lesson
+* Koch result analysis screen
+* Remember last lesson
+
+Polish:
+* Better user input
+* Visual styling
+
+Bonus:
+* Morse machine
+* Score/training history
+* Send mode
