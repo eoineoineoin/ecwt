@@ -5,6 +5,9 @@ import android.media.AudioFormat
 import android.media.AudioTrack
 import android.media.MediaDataSource
 import android.view.KeyEvent
+import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.BlockingQueue
+import kotlin.concurrent.thread
 import kotlin.math.PI
 import kotlin.math.sin
 
@@ -164,24 +167,41 @@ class DitDahSoundStream {
         for(i in 0 until dahLengthInSamples) {
             mDahSound[i] = (0x7fff.toFloat() * sin(2.0f * PI * i * config.toneFrequency * invSampleRate) ).toShort();
         }
+
+        thread() { makeSoundsWorkerThreadFunc() }
     }
 
     fun enqueue(symbols : List<SoundTypes>) {
-        // TODO  want to be able to call this multi-threaded, while this owns a thread which writes the samples
-        for (sym in symbols) {
+        for(sym in symbols) {
+            mSymbolQueue.put(sym)
+        }
+    }
+
+    fun quit() {
+        mShouldQuit = true;
+        mSymbolQueue.put(SoundTypes.WORD_SPACE)
+    }
+
+    fun makeSoundsWorkerThreadFunc() {
+        while(true) {
+            val sym : SoundTypes = mSymbolQueue.take()
+            if(mShouldQuit)
+                return;
+
             when (sym) {
-                //TODO These sounds should include a blank space
                 SoundTypes.DIT -> mSoundPlayer.write(mDitSound, 0, mDitSound.size)
                 SoundTypes.DAH -> mSoundPlayer.write(mDahSound, 0, mDahSound.size)
-                SoundTypes.LETTER_SPACE -> mSoundPlayer.write(mCharacterSpacingSound, 0, mCharacterSpacingSound.size)
-                SoundTypes.WORD_SPACE -> mSoundPlayer.write(mWordSpacingSound, 0, mWordSpacingSound.size)
+                SoundTypes.LETTER_SPACE -> mSoundPlayer.write( mCharacterSpacingSound, 0, mCharacterSpacingSound.size)
+                SoundTypes.WORD_SPACE -> mSoundPlayer.write( mWordSpacingSound, 0, mWordSpacingSound.size)
             }
+
+            if (mSoundPlayer.playState != AudioTrack.PLAYSTATE_PLAYING)
+                mSoundPlayer.play()
         }
-
-        if(mSoundPlayer.playState != AudioTrack.PLAYSTATE_PLAYING)
-            mSoundPlayer.play()
-
     }
+
+    private var mShouldQuit = false;
+    private var mSymbolQueue = ArrayBlockingQueue<SoundTypes>(1000);
 
     private val mAudioSampleRate = 44100;
 

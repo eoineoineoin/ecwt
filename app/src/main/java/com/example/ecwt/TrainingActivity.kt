@@ -17,9 +17,15 @@ class TrainingActivity : AppCompatActivity() {
 
         mTextViewTest = findViewById<TextView>(R.id.TestEnteredText);
 
-        mSoundPlayer = DitDahSoundStream(DitDahGeneratorSettings())
+        initSoundPlayer()
         onKeyUp(KeyEvent.KEYCODE_E, KeyEvent(0,0))
     }
+
+    override fun onResume() {
+        super.onResume()
+        mSoundPlayer = DitDahSoundStream(DitDahGeneratorSettings())
+    }
+
 
     fun startTraining(view: View) {
     }
@@ -35,6 +41,9 @@ class TrainingActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause();
+
+        mSoundPlayer?.quit()
+        mSoundPlayer = null
     }
 
 
@@ -49,6 +58,10 @@ class TrainingActivity : AppCompatActivity() {
         }
 
         return ret
+    }
+
+    private fun initSoundPlayer() {
+        mSoundPlayer = DitDahSoundStream(DitDahGeneratorSettings())
     }
 
     private var mTextViewTest : TextView? = null;
