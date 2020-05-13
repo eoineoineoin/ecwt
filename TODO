@@ -10,6 +10,8 @@ Basic:
 Polish:
 * Better user input
 * Visual styling
+* Settings info text
+* Extract UI strings into resource file
 
 Bonus:
 * Morse machine

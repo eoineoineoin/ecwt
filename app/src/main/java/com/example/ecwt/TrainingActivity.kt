@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 
 class TrainingActivity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class TrainingActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        mSoundPlayer = DitDahSoundStream(DitDahGeneratorSettings())
+        initSoundPlayer()
     }
 
 
@@ -61,7 +62,12 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     private fun initSoundPlayer() {
-        mSoundPlayer = DitDahSoundStream(DitDahGeneratorSettings())
+        val generatorSettings = DitDahGeneratorSettings()
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        generatorSettings.toneFrequency = sharedPreferences.getInt("sender_tone", generatorSettings.toneFrequency)
+
+        mSoundPlayer = DitDahSoundStream(generatorSettings)
     }
 
     private var mTextViewTest : TextView? = null;

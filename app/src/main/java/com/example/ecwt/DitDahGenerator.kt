@@ -139,12 +139,13 @@ class DitDahGenerator : MediaDataSource {
 
 class DitDahGeneratorSettings
 {
-    val toneFrequency = 650
+    var toneFrequency = 650 //TODO These values are duplicated in the settings fragment
     var WordsPerMinute = 20;
 }
 
 class DitDahSoundStream {
     constructor(config : DitDahGeneratorSettings) {
+        // Farnsworth timing calculations: https://morsecode.world/international/timing.html
         //TODO: Compute these properly
         val ditLengthSeconds = 0.15f;
         val dahLengthSeconds = ditLengthSeconds * 3.0f;
