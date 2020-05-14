@@ -53,4 +53,10 @@ class MainActivity : AppCompatActivity() {
         }
         startActivity(intent);
     }
+
+    fun openKochLevelSelect(view :View) {
+        val intent = Intent(this, LevelSelectActivity::class.java).apply {
+        }
+        startActivity(intent)
+    }
 }
