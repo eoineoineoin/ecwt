@@ -1,7 +1,8 @@
-package com.example.ecwt
+package es.eoinrul.ecwt
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import es.eoinrul.ecwt.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

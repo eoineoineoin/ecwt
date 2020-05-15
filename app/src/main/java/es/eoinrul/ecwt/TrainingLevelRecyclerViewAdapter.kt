@@ -1,13 +1,14 @@
-package com.example.ecwt
+package es.eoinrul.ecwt
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import es.eoinrul.ecwt.R
 
 
-import com.example.ecwt.TrainingLevelFragment.OnListFragmentInteractionListener
+import es.eoinrul.ecwt.TrainingLevelFragment.OnListFragmentInteractionListener
 
 import kotlinx.android.synthetic.main.fragment_training_level.view.*
 

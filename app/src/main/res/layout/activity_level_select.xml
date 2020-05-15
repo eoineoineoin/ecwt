@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LevelSelectActivity">
+    tools:context="es.eoinrul.ecwt.LevelSelectActivity">
 
     <fragment
         android:id="@+id/levelSelection_view"
-        android:name="com.example.ecwt.TrainingLevelFragment"
+        android:name="es.eoinrul.ecwt.TrainingLevelFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

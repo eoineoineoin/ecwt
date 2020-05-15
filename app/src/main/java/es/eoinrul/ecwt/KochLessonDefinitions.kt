@@ -1,4 +1,4 @@
-package com.example.ecwt
+package es.eoinrul.ecwt
 
 object KochLessonDefinitions {
     private const val LessonOrder = "KMRSUAPTLOWI.NJEF0YVG5/Q9ZH38B?427C1D6X" // This order is from http://www.hfradio.org/koch_2.html //TODO Add prosign lessons?
@@ -7,7 +7,11 @@ object KochLessonDefinitions {
 
     init {
         for (i in 1 until LessonOrder.length) {
-            Lessons.add(KochLesson(i))
+            Lessons.add(
+                KochLesson(
+                    i
+                )
+            )
         }
     }
 

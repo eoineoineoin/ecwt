@@ -1,4 +1,4 @@
-package com.example.ecwt
+package es.eoinrul.ecwt
 
 import android.media.*
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import es.eoinrul.ecwt.R
 
 // Activity that only echos any inputs typed on a keyboard
 class SounderActivity : AppCompatActivity() {

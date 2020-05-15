@@ -1,9 +1,8 @@
-package com.example.ecwt
+package es.eoinrul.ecwt
 
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
-import android.media.MediaDataSource
 import android.view.KeyEvent
 import java.util.concurrent.ArrayBlockingQueue
 import kotlin.concurrent.thread
@@ -23,44 +22,265 @@ fun StringToSoundSequence(s : String) : List<SoundTypes> {
 
     val first = when(s[0]) {
         ' ' -> listOf(SoundTypes.WORD_SPACE)
-        'A' -> listOf(SoundTypes.DIT, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'B' -> listOf(SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'C' -> listOf(SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'D' -> listOf(SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'E' -> listOf(SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'F' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'G' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'H' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'I' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'J' -> listOf(SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'K' -> listOf(SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'L' -> listOf(SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'M' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'N' -> listOf(SoundTypes.DAH, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'O' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'P' -> listOf(SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'Q' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'R' -> listOf(SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'S' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        'T' -> listOf(SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'U' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'V' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'W' -> listOf(SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'X' -> listOf(SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'Y' -> listOf(SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        'Z' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        '0' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        '1' -> listOf(SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        '2' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        '3' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        '4' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        '5' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        '6' -> listOf(SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        '7' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        '8' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        '9' -> listOf(SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
-        '.' -> listOf(SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.LETTER_SPACE)
-        '?' -> listOf(SoundTypes.DIT, SoundTypes.DIT, SoundTypes.DAH, SoundTypes.DAH, SoundTypes.DIT, SoundTypes.DIT, SoundTypes.LETTER_SPACE)
+        'A' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'B' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'C' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'D' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'E' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'F' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'G' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'H' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'I' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'J' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'K' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'L' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'M' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'N' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'O' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'P' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'Q' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'R' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'S' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        'T' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'U' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'V' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'W' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'X' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'Y' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        'Z' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '0' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '1' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '2' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '3' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '4' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '5' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '6' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '7' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '8' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '9' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '.' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '?' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
         else -> { listOf() }
     }
 
@@ -108,7 +328,9 @@ fun KeycodeToSoundSequence(keycode : Int) : List<SoundTypes> {
         KeyEvent.KEYCODE_9 -> StringToSoundSequence("9");
         KeyEvent.KEYCODE_PERIOD -> StringToSoundSequence(".");
         //KeyEvent.KEYCODE_S -> StringToSoundSequence("?");
-        else -> { StringToSoundSequence(" ")}
+        else -> {
+            StringToSoundSequence(" ")
+        }
     }
 
 }

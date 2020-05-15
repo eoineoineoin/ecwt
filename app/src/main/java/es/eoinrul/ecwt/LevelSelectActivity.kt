@@ -1,9 +1,10 @@
-package com.example.ecwt
+package es.eoinrul.ecwt
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import es.eoinrul.ecwt.R
 
 class LevelSelectActivity : AppCompatActivity(),
     TrainingLevelFragment.OnListFragmentInteractionListener {

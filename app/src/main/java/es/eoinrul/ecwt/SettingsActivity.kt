@@ -1,9 +1,8 @@
-package com.example.ecwt
+package es.eoinrul.ecwt
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import es.eoinrul.ecwt.R
 
 //const val PREFERENCES_FILE = "es.eoinrul.ecwt.PREFERENCES"
 

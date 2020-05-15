@@ -1,4 +1,4 @@
-package com.example.ecwt
+package es.eoinrul.ecwt
 
 import android.content.Context
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import es.eoinrul.ecwt.R
 
 /**
  * A fragment representing a list of Items.
@@ -43,7 +44,10 @@ class TrainingLevelFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = TrainingLevelRecyclerViewAdapter(KochLessonDefinitions.Lessons, listener)
+                adapter = TrainingLevelRecyclerViewAdapter(
+                    KochLessonDefinitions.Lessons,
+                    listener
+                )
             }
         }
         return view

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity">
+    tools:context="es.eoinrul.ecwt.SettingsActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.example.ecwt.SettingsFragment"
+        android:name="es.eoinrul.ecwt.SettingsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
