@@ -1,10 +1,13 @@
 package es.eoinrul.ecwt
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.eoinrul.ecwt.R
+
+const val TRAINING_ALPHABET = "es.eoinrul.ecwt.TRAINING_ALPHABET"
 
 class LevelSelectActivity : AppCompatActivity(),
     TrainingLevelFragment.OnListFragmentInteractionListener {
@@ -23,7 +26,10 @@ class LevelSelectActivity : AppCompatActivity(),
     }
 
     override fun onListFragmentInteraction(lesson: KochLessonDefinitions.KochLesson?) {
-        TODO("Not yet implemented")
+        val intent = Intent(this, TrainingActivity::class.java).apply {
+            putExtra(TRAINING_ALPHABET, lesson?.getAlphabet())
+        }
+        startActivity(intent);
     }
 
 

@@ -29,5 +29,9 @@ object KochLessonDefinitions {
         fun indexForHumans() : Int {
             return lessonIndex
         }
+
+        fun getAlphabet() : String {
+            return LessonOrder.substring(0, lessonIndex + 1)
+        }
     }
 }
