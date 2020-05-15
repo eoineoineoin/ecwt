@@ -10,9 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import com.example.ecwt.dummy.DummyContent
-import com.example.ecwt.dummy.DummyContent.DummyItem
-
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
@@ -46,7 +43,7 @@ class TrainingLevelFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = TrainingLevelRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = TrainingLevelRecyclerViewAdapter(KochLessonDefinitions.Lessons, listener)
             }
         }
         return view
@@ -78,8 +75,7 @@ class TrainingLevelFragment : Fragment() {
      * for more information.
      */
     interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(lesson: KochLessonDefinitions.KochLesson?)
     }
 
     companion object {
