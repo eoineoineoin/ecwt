@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".LevelSelectActivity" android:parentActivityName=".MainActivity"></activity>
         <activity
-            android:name=".TrainingActivity"
+            android:name=".SounderActivity"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateAlwaysVisible">
             <meta-data
@@ -19,7 +19,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".CWSettingsActivity"
+            android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

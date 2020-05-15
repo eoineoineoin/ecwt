@@ -8,15 +8,16 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 
-class TrainingActivity : AppCompatActivity() {
+// Activity that only echos any inputs typed on a keyboard
+class SounderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_training)
+        setContentView(R.layout.activity_sounder)
 
         //val sounderMode = intent.getStringExtra(SOUNDER_MODE);
 
-        mTextViewTest = findViewById<TextView>(R.id.TestEnteredText);
+        mTextViewTest = findViewById<TextView>(R.id.keyedText);
 
         initSoundPlayer()
         onKeyUp(KeyEvent.KEYCODE_E, KeyEvent(0,0))

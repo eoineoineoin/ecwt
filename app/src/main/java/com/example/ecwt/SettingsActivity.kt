@@ -7,7 +7,7 @@ import android.os.Bundle
 
 //const val PREFERENCES_FILE = "es.eoinrul.ecwt.PREFERENCES"
 
-class CWSettingsActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,13 +2,10 @@ package com.example.ecwt
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-
-import kotlinx.android.synthetic.main.activity_main.*
 
 const val SOUNDER_MODE = "es.eoinrul.ecwt.SOUNDER_MODE"
 const val SOUNDER_MODE_USER_INPUT = "es.eoinrul.ecwt.SOUNDER_MODE.USER_INPUT";
@@ -43,12 +40,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openSettings(view: View) {
-        val intent = Intent(this, CWSettingsActivity::class.java);
+        val intent = Intent(this, SettingsActivity::class.java);
         startActivity(intent);
     }
 
     fun openSounder(view: View) {
-        val intent = Intent(this, TrainingActivity::class.java).apply {
+        val intent = Intent(this, SounderActivity::class.java).apply {
             putExtra(SOUNDER_MODE, SOUNDER_MODE_USER_INPUT)
         }
         startActivity(intent);

@@ -4,26 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrainingActivity">
+    tools:context=".SounderActivity">
 
     <TextView
-        android:id="@+id/TestEnteredText"
+        android:id="@+id/keyedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TestEnteredText"
+        android:text="Entered Text Will Go Here"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="44dp" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="40dp"
-        android:onClick="startTraining"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TestEnteredText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
