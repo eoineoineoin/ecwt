@@ -1,6 +1,7 @@
 package es.eoinrul.ecwt
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import kotlin.random.Random
 
+const val TRAINING_ANSWER = "es.eoinrul.ecwt.TRAINING_ANSWER"
+const val TRAINING_COPIED = "es.eoinrul.ecwt.TRAINING_COPIED"
 
 class TrainingActivity : AppCompatActivity(),
     DitDahSoundStream.StreamNotificationListener {
@@ -44,6 +47,12 @@ class TrainingActivity : AppCompatActivity(),
         super.onPause();
         mSoundPlayer?.quit()
         mSoundPlayer = null
+
+        if(mLessonStarted) {
+            // Shut down the soft keyboard
+            val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+        }
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
@@ -67,9 +76,23 @@ class TrainingActivity : AppCompatActivity(),
     }
 
     override fun streamFinished(stream: DitDahSoundStream) {
+        // The lesson text has an extra space at the end, which we don't want to grade
+        var lessonText = mLessonText.trim()
+        // The input text has a leading space that we don't want to grade
+        var inputText = mEnteredTextView.text.trim()
+
+        val intent = Intent(this, TrainingResultsActivity::class.java).apply {
+            putExtra(TRAINING_ANSWER, lessonText)
+            putExtra(TRAINING_COPIED, inputText)
+            putExtra(TRAINING_ALPHABET, mAlphabet) // For a "retry" button
+        }
+        startActivity(intent);
     }
 
     fun onStartTrainingClicked(view : View) {
+        if(mLessonStarted)
+            return
+
         mEnteredTextView.text = " "
 
         // Bring up the soft keyboard
@@ -98,11 +121,14 @@ class TrainingActivity : AppCompatActivity(),
         }
 
         mSoundPlayer!!.enqueue(StringToSoundSequence(lessonText))
+
         mLessonStarted = true
+        mLessonText = lessonText
     }
 
     private var mAlphabet : String = ""
     private var mSoundPlayer : DitDahSoundStream? = null
     private lateinit var mEnteredTextView : TextView
     private var mLessonStarted : Boolean = false
+    private var mLessonText : String = ""
 }

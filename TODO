@@ -1,10 +1,9 @@
 Basic:
-* Record inputs for koch lesson
-* Koch result analysis screen
 * Remember last lesson
 
 Polish:
 * Better user input
+* Better statistics on results
 * Visual styling
 * Settings info text
 * Extract UI strings into resource file
