@@ -6,4 +6,23 @@
     android:layout_height="match_parent"
     tools:context="es.eoinrul.ecwt.TrainingActivity">
 
+    <TextView
+        android:id="@+id/enteredText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="100dp"
+        android:ellipsize="start"
+        android:onClick="onStartTrainingClicked"
+        android:overScrollMode="always"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="Touch to start"
+        android:textAlignment="textEnd"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

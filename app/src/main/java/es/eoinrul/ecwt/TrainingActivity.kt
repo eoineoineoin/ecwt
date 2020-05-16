@@ -1,10 +1,15 @@
 package es.eoinrul.ecwt
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
 import android.os.Bundle
-import android.util.Log
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import kotlin.random.Random
+
 
 class TrainingActivity : AppCompatActivity(),
     DitDahSoundStream.StreamNotificationListener {
@@ -15,8 +20,8 @@ class TrainingActivity : AppCompatActivity(),
 
         initSoundPlayer()
 
-        val alphabet = intent.getStringExtra(TRAINING_ALPHABET);
-        startLesson(alphabet!!) //TODO Only after user input is ready
+        mAlphabet = intent.getStringExtra(TRAINING_ALPHABET)!!;
+        mEnteredTextView = findViewById<TextView>(R.id.enteredText);
     }
 
     private fun initSoundPlayer() {
@@ -25,10 +30,52 @@ class TrainingActivity : AppCompatActivity(),
         generatorSettings.initFromPreferences(sharedPreferences)
 
         mSoundPlayer = DitDahSoundStream(generatorSettings)
-        mSoundPlayer.streamNotificationListener = this
+        mSoundPlayer!!.streamNotificationListener = this
     }
 
-    private fun startLesson(alphabet : String) {
+    override fun onResume() {
+        super.onResume()
+        initSoundPlayer()
+        mEnteredTextView.text = "Touch to Start" // TODO Reset properly, somehow
+        mLessonStarted = false
+    }
+
+    override fun onPause() {
+        super.onPause();
+        mSoundPlayer?.quit()
+        mSoundPlayer = null
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+        // TODO This is a pretty lame input-method implementation. Do this properly.
+        if(!mLessonStarted)
+            return true
+
+        val previousText : String = mEnteredTextView.text.toString()
+
+        if(event.keyCode == KeyEvent.KEYCODE_DEL) {
+            if(previousText.isNotEmpty()) {
+                mEnteredTextView.text = previousText.substring(0, previousText.length - 1)
+            }
+        }
+        else {
+            val enteredChar : Char = event.unicodeChar.toChar()
+            mEnteredTextView.text = previousText + enteredChar.toString()
+        }
+
+        return true
+    }
+
+    override fun streamFinished(stream: DitDahSoundStream) {
+    }
+
+    fun onStartTrainingClicked(view : View) {
+        mEnteredTextView.text = " "
+
+        // Bring up the soft keyboard
+        val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+
         val generatorSettings = DitDahGeneratorSettings()
 
         val lessonLengthInMinutes = 1 // TODO These should be configurable from the settings window
@@ -44,18 +91,18 @@ class TrainingActivity : AppCompatActivity(),
         var rng = Random.Default
         for(i in 0 until numberOfWords) {
             for(c in 0 until wordSize) {
-                val randomLetterIndex = rng.nextInt(0, alphabet.length)
-                lessonText += alphabet.substring(randomLetterIndex, randomLetterIndex + 1)
+                val randomLetterIndex = rng.nextInt(0, mAlphabet.length)
+                lessonText += mAlphabet.substring(randomLetterIndex, randomLetterIndex + 1)
             }
             lessonText += " "
         }
 
-        mSoundPlayer.enqueue(StringToSoundSequence(lessonText))
-
+        mSoundPlayer!!.enqueue(StringToSoundSequence(lessonText))
+        mLessonStarted = true
     }
 
-    private lateinit var mSoundPlayer : DitDahSoundStream
-    override fun streamFinished(stream: DitDahSoundStream) {
-    }
-
+    private var mAlphabet : String = ""
+    private var mSoundPlayer : DitDahSoundStream? = null
+    private lateinit var mEnteredTextView : TextView
+    private var mLessonStarted : Boolean = false
 }
