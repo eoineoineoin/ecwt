@@ -418,17 +418,21 @@ class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
                 SoundTypes.WORD_SPACE -> mWordSpacingSound
             }
 
-            mSoundPlayer.write(soundToWrite, 0, soundToWrite.size)
-
             // Keep track of the number of samples we wrote to fire our "finished" listener
+            // This is done before the write(), since a blocking call might erroneously cause
+            // us to detect the end of the lesson to early.
             // (Seems "frames" and "samples" are interchangeable in the API?)
             mNumberFramesWritten += soundToWrite.size
             mSoundPlayer.setNotificationMarkerPosition(mNumberFramesWritten)
+
+            mSoundPlayer.write(soundToWrite, 0, soundToWrite.size)
 
             // If this is the first symbol, we'll need to start playing.
             if (mSoundPlayer.playState != AudioTrack.PLAYSTATE_PLAYING)
                 mSoundPlayer.play()
         }
+
+
     }
 
     // Optional listener for stream finished event
@@ -470,7 +474,8 @@ class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
         .build();
 
     override fun onMarkerReached(track: AudioTrack?) {
-        streamNotificationListener?.streamFinished(this)
+        if(track!!.notificationMarkerPosition >= mNumberFramesWritten)
+            streamNotificationListener?.streamFinished(this)
     }
 
     override fun onPeriodicNotification(track: AudioTrack?) {
