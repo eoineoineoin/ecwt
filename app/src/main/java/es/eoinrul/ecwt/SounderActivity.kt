@@ -29,10 +29,6 @@ class SounderActivity : AppCompatActivity() {
         initSoundPlayer()
     }
 
-
-    fun startTraining(view: View) {
-    }
-
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
         val sequence = KeycodeToSoundSequence(keyCode);
 
@@ -49,7 +45,6 @@ class SounderActivity : AppCompatActivity() {
         mSoundPlayer = null
     }
 
-
     private fun sequenceToString(sequence: List<SoundTypes>) : String {
         var ret = String()
         for(symbol in sequence) {
@@ -64,10 +59,9 @@ class SounderActivity : AppCompatActivity() {
     }
 
     private fun initSoundPlayer() {
-        val generatorSettings = DitDahGeneratorSettings()
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        generatorSettings.toneFrequency = sharedPreferences.getInt("sender_tone", generatorSettings.toneFrequency)
+        val generatorSettings = DitDahGeneratorSettings()
+        generatorSettings.initFromPreferences(sharedPreferences)
 
         mSoundPlayer = DitDahSoundStream(generatorSettings)
     }

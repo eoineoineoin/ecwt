@@ -1,5 +1,6 @@
 package es.eoinrul.ecwt
 
+import android.content.SharedPreferences
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
@@ -337,13 +338,25 @@ fun KeycodeToSoundSequence(keycode : Int) : List<SoundTypes> {
 
 class DitDahGeneratorSettings
 {
+    fun initFromPreferences(sharedPreferences : SharedPreferences) {
+        //TODO Fix these hardcoded strings
+        toneFrequency = sharedPreferences.getInt("sender_tone", toneFrequency)
+        wordsPerMinute = sharedPreferences.getInt("sender_wpn", wordsPerMinute)
+        farnsworthWordsPerMinute = sharedPreferences.getInt("sender_effectivewpm", farnsworthWordsPerMinute)
+    }
+
     //TODO These values are duplicated in the settings fragment
     var toneFrequency = 650
     var wordsPerMinute = 20
     var farnsworthWordsPerMinute = 20
 }
 
-class DitDahSoundStream {
+class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
+    interface StreamNotificationListener {
+        fun streamFinished(stream : DitDahSoundStream)
+    }
+
+
     constructor(config : DitDahGeneratorSettings) {
         // Farnsworth timing calculations: https://morsecode.world/international/timing.html
 
@@ -373,6 +386,11 @@ class DitDahSoundStream {
             mDahSound[i] = (0x7fff.toFloat() * sin(2.0f * PI * i * config.toneFrequency * invSampleRate) ).toShort()
         }
 
+        // Listen for notifications so we can fire a "sound completed" callback, if registered
+        mSoundPlayer.setPlaybackPositionUpdateListener(this)
+
+        // Create a thread that will pull symbols off our queue and write samples to the audio
+        // device, so it doesn't matter if the write is blocked.
         thread() { makeSoundsWorkerThreadFunc() }
     }
 
@@ -393,28 +411,47 @@ class DitDahSoundStream {
             if(mShouldQuit)
                 return;
 
-            when (sym) {
-                SoundTypes.DIT -> mSoundPlayer.write(mDitSound, 0, mDitSound.size)
-                SoundTypes.DAH -> mSoundPlayer.write(mDahSound, 0, mDahSound.size)
-                SoundTypes.LETTER_SPACE -> mSoundPlayer.write( mCharacterSpacingSound, 0, mCharacterSpacingSound.size)
-                SoundTypes.WORD_SPACE -> mSoundPlayer.write( mWordSpacingSound, 0, mWordSpacingSound.size)
+            val soundToWrite = when (sym) {
+                SoundTypes.DIT -> mDitSound
+                SoundTypes.DAH -> mDahSound
+                SoundTypes.LETTER_SPACE -> mCharacterSpacingSound
+                SoundTypes.WORD_SPACE -> mWordSpacingSound
             }
 
+            mSoundPlayer.write(soundToWrite, 0, soundToWrite.size)
+
+            // Keep track of the number of samples we wrote to fire our "finished" listener
+            // (Seems "frames" and "samples" are interchangeable in the API?)
+            mNumberFramesWritten += soundToWrite.size
+            mSoundPlayer.setNotificationMarkerPosition(mNumberFramesWritten)
+
+            // If this is the first symbol, we'll need to start playing.
             if (mSoundPlayer.playState != AudioTrack.PLAYSTATE_PLAYING)
                 mSoundPlayer.play()
         }
     }
 
+    // Optional listener for stream finished event
+    var streamNotificationListener : StreamNotificationListener? = null
+
+    // Used to notify our audio-track-writing thread that it should quit
     private var mShouldQuit = false;
+
+    // A queue of sounds we want to play
     private var mSymbolQueue = ArrayBlockingQueue<SoundTypes>(1000);
 
     private val mAudioSampleRate = 44100;
 
+    // Keep track of the amount of data we've written
+    private var mNumberFramesWritten = 0
+
+    // Buffers containing the sounds we want to play
     private val mDitSound : ShortArray;
     private val mDahSound : ShortArray;
     private val mWordSpacingSound : ShortArray;
     private val mCharacterSpacingSound : ShortArray;
 
+    // Our actual audio track
     private val mSoundPlayer : AudioTrack = AudioTrack.Builder()
         .setAudioAttributes(
             AudioAttributes.Builder()
@@ -431,4 +468,11 @@ class DitDahSoundStream {
         )
         .setBufferSizeInBytes(mAudioSampleRate)
         .build();
+
+    override fun onMarkerReached(track: AudioTrack?) {
+        streamNotificationListener?.streamFinished(this)
+    }
+
+    override fun onPeriodicNotification(track: AudioTrack?) {
+    }
 }

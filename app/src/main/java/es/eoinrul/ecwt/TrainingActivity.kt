@@ -2,10 +2,12 @@ package es.eoinrul.ecwt
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.preference.PreferenceManager
 import kotlin.random.Random
 
-class TrainingActivity : AppCompatActivity() {
+class TrainingActivity : AppCompatActivity(),
+    DitDahSoundStream.StreamNotificationListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,19 +20,25 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     private fun initSoundPlayer() {
-        val generatorSettings = DitDahGeneratorSettings()
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        generatorSettings.toneFrequency = sharedPreferences.getInt("sender_tone", generatorSettings.toneFrequency)
+        val generatorSettings = DitDahGeneratorSettings()
+        generatorSettings.initFromPreferences(sharedPreferences)
 
         mSoundPlayer = DitDahSoundStream(generatorSettings)
+        mSoundPlayer.streamNotificationListener = this
     }
 
     private fun startLesson(alphabet : String) {
         val generatorSettings = DitDahGeneratorSettings()
+
         val lessonLengthInMinutes = 1 // TODO These should be configurable from the settings window
         val wordSize = 5
-        val numberOfWords = generatorSettings.farnsworthWordsPerMinute * lessonLengthInMinutes
+
+        var sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val quickTestingSwitchEnabled = sharedPrefs.getBoolean("switch_preference_1", false)
+        val numberOfWords = if(!quickTestingSwitchEnabled) {
+            generatorSettings.farnsworthWordsPerMinute * lessonLengthInMinutes
+        } else { 2 } // This is just for quicker testing; remove eventually
 
         var lessonText = String()
         var rng = Random.Default
@@ -47,5 +55,7 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     private lateinit var mSoundPlayer : DitDahSoundStream
+    override fun streamFinished(stream: DitDahSoundStream) {
+    }
 
 }
