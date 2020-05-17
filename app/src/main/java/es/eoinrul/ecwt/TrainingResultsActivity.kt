@@ -8,6 +8,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_level_select.*
 import kotlin.math.min
 
+
 class TrainingResultsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +19,7 @@ class TrainingResultsActivity : AppCompatActivity() {
         var correctText = intent.getStringExtra(TRAINING_ANSWER)?.toLowerCase()
 
         if(userInputText != null && correctText != null) {
-            var editDistance = levenshtein(correctText, userInputText)
+            var editDistance = levenshteinDistance(correctText, userInputText)
 
             var fractionCorrect = (correctText.length - editDistance).toFloat() / correctText.length.toFloat()
             var percentCorrect = if (editDistance == 0) {
@@ -44,17 +45,24 @@ class TrainingResultsActivity : AppCompatActivity() {
         startActivity(intent);
     }
 
-    private fun levenshtein(a : String, b : String) : Int {
+    //TODO Would like to write tests for this
+    private fun levenshteinDistance(a : String, b : String) : Int {
         if(a.isEmpty()) return b.length
         if(b.isEmpty()) return a.length
 
-        if(a[0] == b[0]) {
-            return levenshtein(a.substring(1), b.substring(1))
-        } else {
-            var insertDistance = levenshtein(a, b.substring(1))
-            var deleteDistance = levenshtein(a.substring(1), b)
-            var substituteDistance = levenshtein(a.substring(1), b.substring(1))
-            return 1 + min(min(insertDistance, deleteDistance), substituteDistance)
+        var costMatrix = Array<Array<Int>>(a.length) {Array<Int>(b.length) {0} }
+        var getCost = { i : Int, j : Int -> if(i < 0 && j < 0) 0 else if(i < 0) j + 1 else if(j < 0) i + 1 else costMatrix[i][j] }
+
+        for(i in a.indices) {
+            for (j in b.indices) {
+                var substitutionCost = getCost(i -1, j - 1) + if(a[i] == b[j]) 0 else 1
+                var insertionCost = getCost(i, j - 1) + 1
+                var deletionCost = getCost(i - 1, j) + 1
+                costMatrix[i][j] = minOf(substitutionCost, insertionCost, deletionCost)
+            }
         }
+
+        return costMatrix[a.length - 1][b.length - 1]
     }
+
 }
