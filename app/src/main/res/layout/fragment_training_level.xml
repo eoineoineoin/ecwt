@@ -1,56 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/lesson_select_margin"
-    android:layout_marginBottom="@dimen/lesson_select_margin"
-    android:background="@color/cardview_light_background"
-    android:elevation="2dp"
     android:gravity="center"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/item_number"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:minWidth="52sp"
-        android:text="2"
-        android:textAlignment="textEnd"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:textColor="?android:attr/textColorSecondary"
-        android:textSize="36sp" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?android:attr/listDivider" />
-
-    <LinearLayout
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/lesson_select_margin"
+        android:layout_marginBottom="@dimen/lesson_select_margin"
+        android:background="@color/cardview_light_background"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/content"
-            android:layout_width="match_parent"
+            android:id="@+id/item_number"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R"
-            android:textAlignment="center"
+            android:layout_margin="@dimen/text_margin"
+            android:minWidth="52sp"
+            android:text="2"
+            android:textAlignment="textEnd"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="24sp" />
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="36sp" />
 
-        <TextView
-            android:id="@+id/symbols"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text=".-."
-            android:textAlignment="center"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:background="?android:attr/listDivider" />
 
+        <LinearLayout
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="R"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/symbols"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=".-."
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>
