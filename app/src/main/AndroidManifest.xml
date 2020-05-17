@@ -10,16 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".TrainingResultsActivity"
+            android:label="@string/training_results_activity_label"
             android:parentActivityName=".LevelSelectActivity"
             ></activity>
         <activity
             android:name=".TrainingActivity"
+            android:label="@string/training_activity_label"
             android:parentActivityName=".LevelSelectActivity" />
         <activity
             android:name=".LevelSelectActivity"
+            android:label="@string/level_select_activity_label"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SounderActivity"
+            android:label="@string/sounder_activity_label"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateAlwaysVisible">
             <meta-data
@@ -28,6 +32,7 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
+            android:label="@string/settings_activity_label"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

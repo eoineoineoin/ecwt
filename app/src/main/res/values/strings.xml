@@ -23,4 +23,10 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <string name="sounder_activity_label">Sounder</string>
+    <string name="level_select_activity_label">Select Lesson</string>
+    <string name="training_activity_label">Training Session</string>
+    <string name="training_results_activity_label">Lesson Results</string>
+    <string name="settings_activity_label">Settings</string>
 </resources>
