@@ -6,20 +6,18 @@
     android:layout_height="match_parent"
     tools:context="es.eoinrul.ecwt.TrainingActivity">
 
-    <TextView
+    <EditText
         android:id="@+id/enteredText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="100dp"
-        android:ellipsize="start"
+        android:ems="10"
+        android:hint="@string/start_training_button_label"
+        android:inputType="textPersonName"
         android:onClick="onStartTrainingClicked"
-        android:overScrollMode="always"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:text="@string/start_training_button_label"
-        android:textAlignment="textEnd"
+        android:textAlignment="viewEnd"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

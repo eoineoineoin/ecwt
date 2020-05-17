@@ -1,13 +1,10 @@
 package es.eoinrul.ecwt
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import java.util.*
@@ -26,7 +23,7 @@ class TrainingActivity : AppCompatActivity(),
         initSoundPlayer()
 
         mAlphabet = intent.getStringExtra(TRAINING_ALPHABET)!!;
-        mEnteredTextView = findViewById<TextView>(R.id.enteredText);
+        mEnteredTextView = findViewById<EditText>(R.id.enteredText);
     }
 
     private fun initSoundPlayer() {
@@ -40,7 +37,6 @@ class TrainingActivity : AppCompatActivity(),
     override fun onResume() {
         super.onResume()
         initSoundPlayer()
-        mEnteredTextView.text = "Touch to Start" // TODO Reset properly, somehow
         mLessonStarted = false
     }
 
@@ -48,34 +44,7 @@ class TrainingActivity : AppCompatActivity(),
         super.onPause();
         mSoundPlayer?.quit()
         mSoundPlayer = null
-
-        if(mLessonStarted) {
-            // Shut down the soft keyboard
-            val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-        }
-
         mLessonStarted = false
-    }
-
-    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
-        // TODO This is a pretty lame input-method implementation. Do this properly.
-        if(!mLessonStarted)
-            return true
-
-        val previousText : String = mEnteredTextView.text.toString()
-
-        if(event.keyCode == KeyEvent.KEYCODE_DEL) {
-            if(previousText.isNotEmpty()) {
-                mEnteredTextView.text = previousText.substring(0, previousText.length - 1)
-            }
-        }
-        else {
-            val enteredChar : Char = event.unicodeChar.toChar()
-            mEnteredTextView.text = previousText + enteredChar.toString()
-        }
-
-        return true
     }
 
     override fun streamFinished(stream: DitDahSoundStream) {
@@ -92,7 +61,7 @@ class TrainingActivity : AppCompatActivity(),
                 // The lesson text has an extra space at the end, which we don't want to grade
                 var lessonText = mLessonText.trim()
                 // The input text has a leading space that we don't want to grade
-                var inputText = mEnteredTextView.text.trim()
+                var inputText = mEnteredTextView.text.toString()
 
                 val intent = Intent(activityContext, TrainingResultsActivity::class.java).apply {
                     putExtra(TRAINING_ANSWER, lessonText)
@@ -108,13 +77,7 @@ class TrainingActivity : AppCompatActivity(),
         if(mLessonStarted)
             return
 
-        mEnteredTextView.text = " "
-
-        // Bring up the soft keyboard
-        val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-
-        val generatorSettings = DitDahGeneratorSettings()
+         val generatorSettings = DitDahGeneratorSettings()
 
         val lessonLengthInMinutes = 1 // TODO These should be configurable from the settings window
         val wordSize = 5
@@ -138,6 +101,9 @@ class TrainingActivity : AppCompatActivity(),
         mLessonStarted = true
         mLessonText = lessonText
 
+        // Insert a space into the editable, to clear the hint
+        mEnteredTextView.text.append(" ")
+
         // Pause before starting to let keyboard appear, and user get ready to type
         var secondsPauseBeforeLessonStart : Long = 2
         Timer().schedule(object : TimerTask() {
@@ -151,7 +117,7 @@ class TrainingActivity : AppCompatActivity(),
 
     private var mAlphabet : String = ""
     private var mSoundPlayer : DitDahSoundStream? = null
-    private lateinit var mEnteredTextView : TextView
+    private lateinit var mEnteredTextView : EditText
     private var mLessonStarted : Boolean = false
     private var mLessonText : String = ""
 
