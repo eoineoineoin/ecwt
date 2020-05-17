@@ -3,6 +3,7 @@ package es.eoinrul.ecwt
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.eoinrul.ecwt.R
@@ -21,17 +22,22 @@ class LevelSelectActivity : AppCompatActivity(),
         mLevelSelectView = findViewById<RecyclerView>(R.id.levelSelection_view).apply {
             setHasFixedSize(true)
             layoutManager = mLevelSelectLayoutManager
-            //adapter = mLevelSelectViewAdapter
         }
     }
 
     override fun onListFragmentInteraction(lesson: KochLessonDefinitions.KochLesson?) {
+        if(lesson != null) {
+            // Remember the last lesson that was run
+            var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+            val lastLessonPrefKey = getString(R.string.setting_last_lesson_key)
+            sharedPreferences.edit().putInt(lastLessonPrefKey, lesson.lessonIndex).apply()
+        }
+
         val intent = Intent(this, TrainingActivity::class.java).apply {
             putExtra(TRAINING_ALPHABET, lesson?.getAlphabet())
         }
         startActivity(intent);
     }
-
 
     private lateinit var mLevelSelectView : RecyclerView
     private lateinit var mLevelSelectLayoutManager : RecyclerView.LayoutManager

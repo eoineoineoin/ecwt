@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.preference.PreferenceManager
 import es.eoinrul.ecwt.R
 
 /**
@@ -37,6 +38,11 @@ class TrainingLevelFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_training_level_list, container, false)
 
+        // Get the last lesson index out of the preferences, so we can show an item to launch it
+        var lastLessonPref = getString(R.string.setting_last_lesson_key)
+        var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+        var lastLessonIndex = sharedPreferences.getInt(lastLessonPref, 0)
+
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
@@ -46,7 +52,8 @@ class TrainingLevelFragment : Fragment() {
                 }
                 adapter = TrainingLevelRecyclerViewAdapter(
                     KochLessonDefinitions.Lessons,
-                    listener
+                    listener,
+                    lastLessonIndex
                 )
             }
         }

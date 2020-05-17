@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import es.eoinrul.ecwt.R
 
 
@@ -14,10 +15,12 @@ import kotlinx.android.synthetic.main.fragment_training_level.view.*
 
 class TrainingLevelRecyclerViewAdapter(
     private val mLessons: List<KochLessonDefinitions.KochLesson>,
-    private val mListener: OnListFragmentInteractionListener?
+    private val mListener: OnListFragmentInteractionListener?,
+    private val mLastLessonIndex : Int
 ) : RecyclerView.Adapter<TrainingLevelRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
+
 
     init {
         mOnClickListener = View.OnClickListener { v ->
@@ -35,7 +38,8 @@ class TrainingLevelRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val lesson = mLessons[position]
+        val lessonIndex = if(position == 0) mLastLessonIndex else position - 1
+        val lesson = mLessons[lessonIndex]
         holder.mIdView.text = "Lesson " + lesson.indexForHumans().toString()
         holder.mContentView.text = lesson.toString()
 
@@ -45,7 +49,7 @@ class TrainingLevelRecyclerViewAdapter(
         }
     }
 
-    override fun getItemCount(): Int = mLessons.size
+    override fun getItemCount(): Int =  mLessons.size + 1 // +1 for the "Last lesson" button
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.item_number

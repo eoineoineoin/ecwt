@@ -15,10 +15,13 @@
     <string name="setting_tone_frequency_label">Tone Frequency</string>
     <string name="setting_wpm_label">Words per Minute</string>
     <string name="setting_effective_wpm_label">Effective Words per Minute</string>
+
     <string name="setting_tone_key">sender_tone</string>
     <string name="setting_wpm_key">sender_wpm</string>
     <string name="setting_effective_wpm_key">sender_effective_wpm</string>
+    <string name="setting_last_lesson_key">last_lesson_index</string>
 
     <string name="training_results_summary">Score: %d%%\nMistakes: %d</string>
     <string name="training_results_error">Error: No input?</string>
+
 </resources>
