@@ -61,7 +61,7 @@ class TrainingActivity : AppCompatActivity(),
                 // The lesson text has an extra space at the end, which we don't want to grade
                 var lessonText = mLessonText.trim()
                 // The input text has a leading space that we don't want to grade
-                var inputText = mEnteredTextView.text.toString()
+                var inputText = mEnteredTextView.text.toString().trim()
 
                 val intent = Intent(activityContext, TrainingResultsActivity::class.java).apply {
                     putExtra(TRAINING_ANSWER, lessonText)
