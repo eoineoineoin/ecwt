@@ -40,7 +40,7 @@ class TrainingLevelRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val lessonIndex = if(position == 0) mLastLessonIndex else position - 1
         val lesson = mLessons[lessonIndex]
-        holder.mIdView.text = "Lesson " + lesson.indexForHumans().toString()
+        holder.mIdView.text = lesson.indexForHumans().toString()
         holder.mContentView.text = lesson.toString()
         holder.mSymbolView.text = lesson.newSignsAsString()
 

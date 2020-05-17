@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="horizontal">
 
     <TextView
@@ -9,21 +10,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:minWidth="52sp"
+        android:text="2"
+        android:textAlignment="textEnd"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="36sp" />
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
-    <TextView
-        android:id="@+id/symbols"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+    <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/symbols"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".-."
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="24sp" />
+    </LinearLayout>
 
 </LinearLayout>
