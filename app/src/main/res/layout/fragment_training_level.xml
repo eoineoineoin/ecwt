@@ -11,6 +11,7 @@
         android:layout_marginTop="@dimen/lesson_select_margin"
         android:layout_marginBottom="@dimen/lesson_select_margin"
         android:background="@color/cardview_light_background"
+        android:foreground="?attr/selectableItemBackground"
         android:elevation="2dp"
         android:gravity="center"
         android:orientation="horizontal">
