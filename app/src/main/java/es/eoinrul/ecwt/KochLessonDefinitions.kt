@@ -24,6 +24,13 @@ object KochLessonDefinitions {
             return LessonOrder.substring(lessonIndex + 1 , lessonIndex + 2)
         }
 
+        fun newSignsAsString() : String {
+            var newChars = if(lessonIndex == 0) {
+                LessonOrder.substring(0, 1) + " " + LessonOrder.substring(1, 2)
+            } else { LessonOrder.substring(lessonIndex + 1 , lessonIndex + 2) }
+            return SequenceToString(StringToSoundSequence(newChars))
+        }
+
         // Get the lesson number, for display in the UI
         fun indexForHumans() : Int {
             return lessonIndex + 1

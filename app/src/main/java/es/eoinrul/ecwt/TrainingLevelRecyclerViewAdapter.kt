@@ -42,6 +42,7 @@ class TrainingLevelRecyclerViewAdapter(
         val lesson = mLessons[lessonIndex]
         holder.mIdView.text = "Lesson " + lesson.indexForHumans().toString()
         holder.mContentView.text = lesson.toString()
+        holder.mSymbolView.text = lesson.newSignsAsString()
 
         with(holder.mView) {
             tag = lesson
@@ -54,6 +55,7 @@ class TrainingLevelRecyclerViewAdapter(
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.item_number
         val mContentView: TextView = mView.content
+        val mSymbolView : TextView = mView.symbols
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"

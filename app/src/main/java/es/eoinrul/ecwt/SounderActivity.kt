@@ -34,7 +34,7 @@ class SounderActivity : AppCompatActivity() {
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
         val sequence = KeycodeToSoundSequence(keyCode);
 
-        mTextViewTest?.text = sequenceToString(sequence);
+        mTextViewTest?.text = SequenceToString(sequence);
 
         mSoundPlayer?.enqueue(sequence);
         return true;
@@ -45,19 +45,6 @@ class SounderActivity : AppCompatActivity() {
 
         mSoundPlayer?.quit()
         mSoundPlayer = null
-    }
-
-    private fun sequenceToString(sequence: List<SoundTypes>) : String {
-        var ret = String()
-        for(symbol in sequence) {
-            ret += when(symbol) {
-                SoundTypes.DIT -> "·"
-                SoundTypes.DAH -> "-"
-                else -> " "
-            }
-        }
-
-        return ret
     }
 
     private fun initSoundPlayer() {

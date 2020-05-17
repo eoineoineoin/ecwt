@@ -17,4 +17,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/symbols"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_weight="1"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
 </LinearLayout>

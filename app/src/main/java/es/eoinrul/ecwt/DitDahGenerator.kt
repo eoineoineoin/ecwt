@@ -17,6 +17,7 @@ enum class SoundTypes {
     DIT, DAH, LETTER_SPACE, WORD_SPACE
 }
 
+// Given a string, convert it to a sequence of SoundTypes representing the morse code
 fun StringToSoundSequence(s : String) : List<SoundTypes> {
     if(s.isEmpty())
     {
@@ -290,6 +291,19 @@ fun StringToSoundSequence(s : String) : List<SoundTypes> {
     return first + StringToSoundSequence(s.substring(1));
 }
 
+// Given a list of SoundTypes, convert them to a string suitable for display
+fun SequenceToString(sequence: List<SoundTypes>) : String {
+    var ret = String()
+    for(symbol in sequence) {
+        ret += when(symbol) {
+            SoundTypes.DIT -> "·"
+            SoundTypes.DAH -> "-"
+            else -> " "
+        }
+    }
+    return ret
+}
+
 // Almost certainly the wrong way to do this
 fun KeycodeToSoundSequence(keycode : Int) : List<SoundTypes> {
     return when(keycode) {
@@ -335,7 +349,6 @@ fun KeycodeToSoundSequence(keycode : Int) : List<SoundTypes> {
             StringToSoundSequence(" ")
         }
     }
-
 }
 
 class DitDahGeneratorSettings
