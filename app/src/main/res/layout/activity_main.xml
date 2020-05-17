@@ -18,20 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="openSounder"
-            android:text="Sounder" />
+            android:text="@string/sounder_button_label" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="openKochLevelSelect"
-            android:text="Koch Training" />
+            android:text="@string/training_button_label" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="openSettings"
-            android:text="To settings" />
+            android:text="@string/settings_button_label" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

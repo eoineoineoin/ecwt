@@ -1,5 +1,7 @@
 package es.eoinrul.ecwt
 
+import android.content.ContentProvider
+import android.content.Context
 import android.media.*
 import android.os.Bundle
 import android.view.KeyEvent
@@ -59,9 +61,8 @@ class SounderActivity : AppCompatActivity() {
     }
 
     private fun initSoundPlayer() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val generatorSettings = DitDahGeneratorSettings()
-        generatorSettings.initFromPreferences(sharedPreferences)
+        generatorSettings.initFromPreferences(this)
 
         mSoundPlayer = DitDahSoundStream(generatorSettings)
     }

@@ -28,9 +28,8 @@ class TrainingActivity : AppCompatActivity(),
     }
 
     private fun initSoundPlayer() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val generatorSettings = DitDahGeneratorSettings()
-        generatorSettings.initFromPreferences(sharedPreferences)
+        generatorSettings.initFromPreferences(this)
 
         mSoundPlayer = DitDahSoundStream(generatorSettings)
         mSoundPlayer!!.streamNotificationListener = this

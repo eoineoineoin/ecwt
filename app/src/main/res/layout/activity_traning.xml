@@ -18,7 +18,7 @@
         android:overScrollMode="always"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:text="Touch to start"
+        android:text="@string/start_training_button_label"
         android:textAlignment="textEnd"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"

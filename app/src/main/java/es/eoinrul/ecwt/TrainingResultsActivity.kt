@@ -14,18 +14,27 @@ class TrainingResultsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_training_results)
 
-        var userInputText = intent.getStringExtra(TRAINING_COPIED).toLowerCase()
-        var correctText = intent.getStringExtra(TRAINING_ANSWER).toLowerCase()
+        var userInputText = intent.getStringExtra(TRAINING_COPIED)?.toLowerCase()
+        var correctText = intent.getStringExtra(TRAINING_ANSWER)?.toLowerCase()
 
-        var editDistance = levenshtein(correctText, userInputText)
+        if(userInputText != null && correctText != null) {
+            var editDistance = levenshtein(correctText, userInputText)
 
-        var fractionCorrect : Float = (correctText.length - editDistance).toFloat() / correctText.length.toFloat()
-        var percentCorrect = if(editDistance == 0) { 100 } else { (fractionCorrect * 100.0f).toInt() }
+            var fractionCorrect = (correctText.length - editDistance).toFloat() / correctText.length.toFloat()
+            var percentCorrect = if (editDistance == 0) {
+                100
+            } else {
+                (fractionCorrect * 100.0f).toInt()
+            }
 
-        findViewById<TextView>(R.id.resultSummary).text = "Score: " + percentCorrect + "%\nMade " + editDistance.toString() + " mistakes"
+            findViewById<TextView>(R.id.resultSummary).text = getString(R.string.training_results_summary, percentCorrect, editDistance)
+        }
+        else {
+            findViewById<TextView>(R.id.resultSummary).text =
+                getString(R.string.training_results_error)
+        }
 
         // TODO Could have a per-character breakdown here
-        // TODO Next lesson button?
     }
 
     fun onTryAgainButtonPressed(view : View) {

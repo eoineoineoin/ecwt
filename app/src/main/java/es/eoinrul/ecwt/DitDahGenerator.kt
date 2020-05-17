@@ -1,10 +1,12 @@
 package es.eoinrul.ecwt
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
 import android.view.KeyEvent
+import androidx.preference.PreferenceManager
 import java.util.concurrent.ArrayBlockingQueue
 import kotlin.concurrent.thread
 import kotlin.math.PI
@@ -338,11 +340,11 @@ fun KeycodeToSoundSequence(keycode : Int) : List<SoundTypes> {
 
 class DitDahGeneratorSettings
 {
-    fun initFromPreferences(sharedPreferences : SharedPreferences) {
-        //TODO Fix these hardcoded strings
-        toneFrequency = sharedPreferences.getInt("sender_tone", toneFrequency)
-        wordsPerMinute = sharedPreferences.getInt("sender_wpn", wordsPerMinute)
-        farnsworthWordsPerMinute = sharedPreferences.getInt("sender_effectivewpm", farnsworthWordsPerMinute)
+    fun initFromPreferences(ctx : Context) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ctx)
+        toneFrequency = sharedPreferences.getInt(ctx.getString(R.string.setting_tone_key), toneFrequency)
+        wordsPerMinute = sharedPreferences.getInt(ctx.getString(R.string.setting_wpm_key), wordsPerMinute)
+        farnsworthWordsPerMinute = sharedPreferences.getInt(ctx.getString(R.string.setting_effective_wpm_key), farnsworthWordsPerMinute)
     }
 
     //TODO These values are duplicated in the settings fragment

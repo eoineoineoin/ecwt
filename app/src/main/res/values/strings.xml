@@ -1,32 +1,24 @@
 <resources>
     <string name="app_name">Ecwt</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <string name="sounder_activity_label">Sounder</string>
     <string name="level_select_activity_label">Select Lesson</string>
     <string name="training_activity_label">Training Session</string>
     <string name="training_results_activity_label">Lesson Results</string>
     <string name="settings_activity_label">Settings</string>
+
+    <string name="sounder_button_label">Sounder</string>
+    <string name="training_button_label">Koch Training</string>
+    <string name="settings_button_label">Settings</string>
+    <string name="retry_training_button_label">Try Again</string>
+    <string name="start_training_button_label">Touch to Start</string>
+    <string name="setting_tone_frequency_label">Tone Frequency</string>
+    <string name="setting_wpm_label">Words per Minute</string>
+    <string name="setting_effective_wpm_label">Effective Words per Minute</string>
+    <string name="setting_tone_key">sender_tone</string>
+    <string name="setting_wpm_key">sender_wpm</string>
+    <string name="setting_effective_wpm_key">sender_effective_wpm</string>
+
+    <string name="training_results_summary">Score: %d%%\nMistakes: %d</string>
+    <string name="training_results_error">Error: No input?</string>
 </resources>

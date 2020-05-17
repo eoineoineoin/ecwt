@@ -14,29 +14,29 @@
             android:defaultValue="600"
             android:max="900"
             app:defaultValue="650"
-            app:key="sender_tone"
+            app:key="@string/setting_tone_key"
             app:min="500"
             app:seekBarIncrement="50"
             app:showSeekBarValue="true"
-            app:title="Tone Frequency" />
+            app:title="@string/setting_tone_frequency_label" />
 
         <SeekBarPreference
             android:defaultValue="600"
             android:max="50"
             app:defaultValue="20"
-            app:key="sender_wpm"
+            app:key="@string/setting_wpm_key"
             app:min="5"
             app:showSeekBarValue="true"
-            app:title="Words per Minute" />
+            app:title="@string/setting_wpm_label" />
 
         <SeekBarPreference
             android:defaultValue="600"
             android:max="50"
             app:defaultValue="20"
-            app:key="sender_effectivewpm"
+            app:key="@string/setting_effective_wpm_key"
             app:min="5"
             app:showSeekBarValue="true"
-            app:title="Effective Words per Minute" />
+            app:title="@string/setting_effective_wpm_label" />
 
     </PreferenceCategory>
 
