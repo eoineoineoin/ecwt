@@ -1,6 +1,7 @@
 package es.eoinrul.ecwt
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -9,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import java.util.*
 import kotlin.random.Random
 
 const val TRAINING_ANSWER = "es.eoinrul.ecwt.TRAINING_ANSWER"
@@ -82,17 +84,24 @@ class TrainingActivity : AppCompatActivity(),
             return
         }
 
-        // The lesson text has an extra space at the end, which we don't want to grade
-        var lessonText = mLessonText.trim()
-        // The input text has a leading space that we don't want to grade
-        var inputText = mEnteredTextView.text.trim()
+        // Wait for a bit before the lesson ends to give user time to enter the last characters
+        var secondsPauseBeforeLessonEnd : Long = 2
+        var activityContext : Context = this
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                // The lesson text has an extra space at the end, which we don't want to grade
+                var lessonText = mLessonText.trim()
+                // The input text has a leading space that we don't want to grade
+                var inputText = mEnteredTextView.text.trim()
 
-        val intent = Intent(this, TrainingResultsActivity::class.java).apply {
-            putExtra(TRAINING_ANSWER, lessonText)
-            putExtra(TRAINING_COPIED, inputText)
-            putExtra(TRAINING_ALPHABET, mAlphabet) // For a "retry" button
-        }
-        startActivity(intent);
+                val intent = Intent(activityContext, TrainingResultsActivity::class.java).apply {
+                    putExtra(TRAINING_ANSWER, lessonText)
+                    putExtra(TRAINING_COPIED, inputText)
+                    putExtra(TRAINING_ALPHABET, mAlphabet) // For a "retry" button
+                }
+                startActivity(intent);
+            }
+        }, secondsPauseBeforeLessonEnd * 1000)
     }
 
     fun onStartTrainingClicked(view : View) {
@@ -126,10 +135,18 @@ class TrainingActivity : AppCompatActivity(),
             lessonText += " "
         }
 
-        mSoundPlayer!!.enqueue(StringToSoundSequence(lessonText))
-
         mLessonStarted = true
         mLessonText = lessonText
+
+        // Pause before starting to let keyboard appear, and user get ready to type
+        var secondsPauseBeforeLessonStart : Long = 2
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                if(mLessonStarted) {
+                    mSoundPlayer!!.enqueue(StringToSoundSequence(lessonText))
+                }
+            }
+        }, secondsPauseBeforeLessonStart * 1000)
     }
 
     private var mAlphabet : String = ""
@@ -137,4 +154,6 @@ class TrainingActivity : AppCompatActivity(),
     private lateinit var mEnteredTextView : TextView
     private var mLessonStarted : Boolean = false
     private var mLessonText : String = ""
+
+    private var mLessonStartDelayTimer : Timer = Timer()
 }
