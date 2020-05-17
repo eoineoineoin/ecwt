@@ -52,6 +52,8 @@ class TrainingActivity : AppCompatActivity(),
             val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
         }
+
+        mLessonStarted = false
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
@@ -75,6 +77,11 @@ class TrainingActivity : AppCompatActivity(),
     }
 
     override fun streamFinished(stream: DitDahSoundStream) {
+        if(!mLessonStarted) {
+            // Don't do anything if we've stopped the activity
+            return
+        }
+
         // The lesson text has an extra space at the end, which we don't want to grade
         var lessonText = mLessonText.trim()
         // The input text has a leading space that we don't want to grade
