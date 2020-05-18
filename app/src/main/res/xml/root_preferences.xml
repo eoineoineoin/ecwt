@@ -23,6 +23,7 @@
         <SeekBarPreference
             android:defaultValue="600"
             android:max="50"
+            android:summary="@string/setting_wpm_summary"
             app:defaultValue="20"
             app:key="@string/setting_wpm_key"
             app:min="5"
@@ -36,6 +37,7 @@
             app:key="@string/setting_effective_wpm_key"
             app:min="5"
             app:showSeekBarValue="true"
+            app:summary="@string/setting_effective_wpm_summary"
             app:title="@string/setting_effective_wpm_label" />
 
     </PreferenceCategory>

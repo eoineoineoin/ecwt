@@ -14,7 +14,10 @@
     <string name="start_training_button_label">Touch to Start</string>
     <string name="setting_tone_frequency_label">Tone Frequency</string>
     <string name="setting_wpm_label">Words per Minute</string>
+    <string name="setting_wpm_summary">Controls the speed each character is sent</string>
     <string name="setting_effective_wpm_label">Effective Words per Minute</string>
+    <string name="setting_effective_wpm_summary">Allows extra spacing between characters</string>
+
 
     <string name="setting_tone_key">sender_tone</string>
     <string name="setting_wpm_key">sender_wpm</string>
@@ -26,7 +29,7 @@
     <string name="training_results_summary">Score: %d%%\nMistakes: %d</string>
     <string name="training_results_error">Error: No input?</string>
     <string name="settings_sender_heading">Sender</string>
-    <string name="settings_koch_heading">Koch Lessons</string>
+    <string name="settings_koch_heading">@string/training_button_label</string>
     <string name="setting_koch_lesson_length_label">Minutes per session</string>
     <string name="setting_koch_lesson_vary_label">Variable group length</string>
     <string name="setting_koch_lesson_vary_off">Always groups of 5</string>
