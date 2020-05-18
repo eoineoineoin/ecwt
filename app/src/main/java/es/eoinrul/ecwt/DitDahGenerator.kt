@@ -351,26 +351,26 @@ fun KeycodeToSoundSequence(keycode : Int) : List<SoundTypes> {
     }
 }
 
-class DitDahGeneratorSettings
-{
-    fun initFromPreferences(ctx : Context) {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ctx)
-        toneFrequency = sharedPreferences.getInt(ctx.getString(R.string.setting_tone_key), toneFrequency)
-        wordsPerMinute = sharedPreferences.getInt(ctx.getString(R.string.setting_wpm_key), wordsPerMinute)
-        farnsworthWordsPerMinute = sharedPreferences.getInt(ctx.getString(R.string.setting_effective_wpm_key), farnsworthWordsPerMinute)
-    }
-
+data class DitDahGeneratorSettings(var context : Context? = null) {
     //TODO These values are duplicated in the settings fragment
     var toneFrequency = 650
     var wordsPerMinute = 20
     var farnsworthWordsPerMinute = 20
+
+    init {
+        if(context != null) {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            toneFrequency = sharedPreferences.getInt(context!!.getString(R.string.setting_tone_key), toneFrequency)
+            wordsPerMinute = sharedPreferences.getInt(context!!.getString(R.string.setting_wpm_key), wordsPerMinute)
+            farnsworthWordsPerMinute = sharedPreferences.getInt(context!!.getString(R.string.setting_effective_wpm_key), farnsworthWordsPerMinute)
+        }
+    }
 }
 
 class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
     interface StreamNotificationListener {
         fun streamFinished(stream : DitDahSoundStream)
     }
-
 
     constructor(config : DitDahGeneratorSettings) {
         // Farnsworth timing calculations: https://morsecode.world/international/timing.html

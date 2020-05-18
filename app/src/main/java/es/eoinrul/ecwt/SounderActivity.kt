@@ -48,9 +48,7 @@ class SounderActivity : AppCompatActivity() {
     }
 
     private fun initSoundPlayer() {
-        val generatorSettings = DitDahGeneratorSettings()
-        generatorSettings.initFromPreferences(this)
-
+        val generatorSettings = DitDahGeneratorSettings(this)
         mSoundPlayer = DitDahSoundStream(generatorSettings)
     }
 
