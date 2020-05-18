@@ -1,7 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="Sender">
+    <PreferenceCategory app:title="@string/settings_sender_heading">
         <SwitchPreference
             android:defaultValue="false"
             android:key="switch_preference_1"
@@ -37,6 +37,24 @@
             app:min="5"
             app:showSeekBarValue="true"
             app:title="@string/setting_effective_wpm_label" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_koch_heading">
+        <SeekBarPreference
+            android:defaultValue="600"
+            android:max="10"
+            app:defaultValue="1"
+            app:key="@string/setting_koch_lesson_length_key"
+            app:min="1"
+            app:showSeekBarValue="true"
+            app:title="@string/setting_koch_lesson_length_label" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/setting_koch_lesson_vary_word_size_key"
+            android:summaryOff="@string/setting_koch_lesson_vary_off"
+            android:summaryOn="@string/setting_koch_lesson_vary_on"
+            android:title="@string/setting_koch_lesson_vary_label" />
 
     </PreferenceCategory>
 

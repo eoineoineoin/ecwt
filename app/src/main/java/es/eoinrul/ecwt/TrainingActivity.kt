@@ -77,19 +77,28 @@ class TrainingActivity : AppCompatActivity(),
 
          val generatorSettings = DitDahGeneratorSettings()
 
-        val lessonLengthInMinutes = 1 // TODO These should be configurable from the settings window
-        val wordSize = 5
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        val lessonLengthInMinutes = sharedPreferences.getInt(getString(R.string.setting_koch_lesson_length_key), 1)
+        var minWordSize = 5
+        var maxWordSize = 5
+        if(sharedPreferences.getBoolean(getString(R.string.setting_koch_lesson_vary_word_size_key), false)) {
+            minWordSize = 2
+            maxWordSize = 6
+        }
 
         var sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
         val quickTestingSwitchEnabled = sharedPrefs.getBoolean("switch_preference_1", false)
         val numberOfWords = if(!quickTestingSwitchEnabled) {
+            // This is only an approximation
             generatorSettings.farnsworthWordsPerMinute * lessonLengthInMinutes
         } else { 2 } // This is just for quicker testing; remove eventually
 
         var lessonText = String()
         var rng = Random.Default
         for(i in 0 until numberOfWords) {
-            for(c in 0 until wordSize) {
+            val thisWordSize = rng.nextInt(minWordSize, maxWordSize + 1)
+            for(c in 0 until thisWordSize) {
                 val randomLetterIndex = rng.nextInt(0, mAlphabet.length)
                 lessonText += mAlphabet.substring(randomLetterIndex, randomLetterIndex + 1)
             }

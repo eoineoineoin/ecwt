@@ -20,8 +20,15 @@
     <string name="setting_wpm_key">sender_wpm</string>
     <string name="setting_effective_wpm_key">sender_effective_wpm</string>
     <string name="setting_last_lesson_key">last_lesson_index</string>
+    <string name="setting_koch_lesson_length_key">koch_lesson_length</string>
+    <string name="setting_koch_lesson_vary_word_size_key">koch_lesson_vary_word_size</string>
 
     <string name="training_results_summary">Score: %d%%\nMistakes: %d</string>
     <string name="training_results_error">Error: No input?</string>
-
+    <string name="settings_sender_heading">Sender</string>
+    <string name="settings_koch_heading">Koch Lessons</string>
+    <string name="setting_koch_lesson_length_label">Minutes per session</string>
+    <string name="setting_koch_lesson_vary_label">Variable group length</string>
+    <string name="setting_koch_lesson_vary_off">Always groups of 5</string>
+    <string name="setting_koch_lesson_vary_on">Groups between 2 and 6 characters</string>
 </resources>
