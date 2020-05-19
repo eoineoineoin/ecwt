@@ -18,7 +18,6 @@
     <string name="setting_effective_wpm_label">Effective Words per Minute</string>
     <string name="setting_effective_wpm_summary">Allows extra spacing between characters</string>
 
-
     <string name="setting_tone_key">sender_tone</string>
     <string name="setting_wpm_key">sender_wpm</string>
     <string name="setting_effective_wpm_key">sender_effective_wpm</string>
@@ -34,4 +33,24 @@
     <string name="setting_koch_lesson_vary_label">Variable group length</string>
     <string name="setting_koch_lesson_vary_off">Always groups of 5</string>
     <string name="setting_koch_lesson_vary_on">Groups between 2 and 6 characters</string>
+
+    <string-array name="tone_frequency_strings">
+        <item>400Hz</item>
+        <item>450Hz</item>
+        <item>500Hz</item>
+        <item>550Hz</item>
+        <item>600Hz</item>
+        <item>650Hz</item>
+        <item>700Hz</item>
+    </string-array>
+
+    <string-array name="tone_frequency_values">
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+        <item>550</item>
+        <item>600</item>
+        <item>650</item>
+        <item>700</item>
+    </string-array>
 </resources>

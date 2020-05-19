@@ -360,9 +360,11 @@ data class DitDahGeneratorSettings(var context : Context? = null) {
     init {
         if(context != null) {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-            toneFrequency = sharedPreferences.getInt(context!!.getString(R.string.setting_tone_key), toneFrequency)
             wordsPerMinute = sharedPreferences.getInt(context!!.getString(R.string.setting_wpm_key), wordsPerMinute)
             farnsworthWordsPerMinute = sharedPreferences.getInt(context!!.getString(R.string.setting_effective_wpm_key), farnsworthWordsPerMinute)
+
+            // This one is a little strange; the ListPreference stores a string, which we need to parse
+            toneFrequency = sharedPreferences.getString(context!!.getString(R.string.setting_tone_key), toneFrequency.toString())!!.toInt()
         }
     }
 }

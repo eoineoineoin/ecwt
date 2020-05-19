@@ -10,15 +10,12 @@
             android:summaryOn="YEAH"
             android:title="Switch preference" />
 
-        <SeekBarPreference
+        <ListPreference
             android:defaultValue="600"
-            android:max="900"
-            app:defaultValue="650"
-            app:key="@string/setting_tone_key"
-            app:min="500"
-            app:seekBarIncrement="50"
-            app:showSeekBarValue="true"
-            app:title="@string/setting_tone_frequency_label" />
+            android:entries="@array/tone_frequency_strings"
+            android:entryValues="@array/tone_frequency_values"
+            android:key="@string/setting_tone_key"
+            android:title="@string/setting_tone_frequency_label" />
 
         <SeekBarPreference
             android:defaultValue="600"
