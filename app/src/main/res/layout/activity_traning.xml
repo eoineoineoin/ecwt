@@ -15,7 +15,7 @@
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="@string/start_training_button_label"
-        android:inputType="textPersonName"
+        android:inputType="textVisiblePassword|textNoSuggestions|textPersonName"
         android:onClick="onStartTrainingClicked"
         android:textAlignment="viewEnd"
         android:textSize="36sp"
