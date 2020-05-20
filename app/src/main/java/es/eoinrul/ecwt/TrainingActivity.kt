@@ -46,7 +46,7 @@ class TrainingActivity : AppCompatActivity(),
         mLessonStarted = false
     }
 
-    override fun streamFinished(stream: DitDahSoundStream) {
+    override fun symbolsExhausted(stream: DitDahSoundStream) {
         if(!mLessonStarted) {
             // Don't do anything if we've stopped the activity
             return

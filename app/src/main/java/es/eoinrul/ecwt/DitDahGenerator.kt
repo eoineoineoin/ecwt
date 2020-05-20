@@ -370,9 +370,10 @@ data class DitDahGeneratorSettings(var context : Context? = null) {
     }
 }
 
-class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
+class DitDahSoundStream {
     interface StreamNotificationListener {
-        fun streamFinished(stream : DitDahSoundStream)
+        // We ran out of symbols to add to the stream
+        fun symbolsExhausted(stream : DitDahSoundStream)
     }
 
     constructor(config : DitDahGeneratorSettings) {
@@ -404,9 +405,6 @@ class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
             mDahSound[i] = (0x7fff.toFloat() * sin(2.0f * PI * i * config.toneFrequency * invSampleRate) ).toShort()
         }
 
-        // Listen for notifications so we can fire a "sound completed" callback, if registered
-        mSoundPlayer.setPlaybackPositionUpdateListener(this)
-
         // Create a thread that will pull symbols off our queue and write samples to the audio
         // device, so it doesn't matter if the write is blocked.
         thread() { makeSoundsWorkerThreadFunc() }
@@ -427,15 +425,18 @@ class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
     fun makeSoundsWorkerThreadFunc() {
         while(true) {
             // In order to avoid underruns, we want to call stop() on our AudioTrack if there's
-            // no new symbols incoming. Wait to get an item from the queue for the length of half
-            // a dit; if there's nothing ready, stop the track, and wait indefinitely
+            // no new symbols incoming. Wait to get an item from the queue for the length of a dit
+            //  and a half; if there's nothing ready, stop the track, and wait indefinitely
             val ditLengthSeconds = mDitSound.size.toFloat() / mAudioSampleRate.toFloat()
-            val waitDuration = (1000.0f * 0.5f * ditLengthSeconds).toLong()
+            val waitDuration = (1000.0f * 1.5f * ditLengthSeconds).toLong()
             var sym : SoundTypes? = mSymbolQueue.poll(waitDuration, TimeUnit.MILLISECONDS)
 
             if(sym == null) {
+                // We didn't get a symbol quickly enough; stop the stream:
                 mSoundPlayer.stop()
-                // Now that the audio player has stopped, we can wait indefinitely
+                // Then tell any listener, give them the opportunity to restart or quit:
+                streamNotificationListener?.symbolsExhausted(this)
+                // Now we can wait indefinitely:
                 sym = mSymbolQueue.take()
             }
 
@@ -449,21 +450,12 @@ class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
                 SoundTypes.WORD_SPACE -> mWordSpacingSound
             }
 
-            // Keep track of the number of samples we wrote to fire our "finished" listener
-            // This is done before the write(), since a blocking call might erroneously cause
-            // us to detect the end of the lesson to early.
-            // (Seems "frames" and "samples" are interchangeable in the API?)
-            mNumberFramesWritten += soundToWrite.size
-            mSoundPlayer.setNotificationMarkerPosition(mNumberFramesWritten)
-
             mSoundPlayer.write(soundToWrite, 0, soundToWrite.size)
 
             // If this is the first symbol, we'll need to start playing.
             if (mSoundPlayer.playState != AudioTrack.PLAYSTATE_PLAYING)
                 mSoundPlayer.play()
         }
-
-
     }
 
     // Optional listener for stream finished event
@@ -476,9 +468,6 @@ class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
     private var mSymbolQueue = ArrayBlockingQueue<SoundTypes>(1000);
 
     private val mAudioSampleRate = 44100;
-
-    // Keep track of the amount of data we've written
-    private var mNumberFramesWritten = 0
 
     // Buffers containing the sounds we want to play
     private val mDitSound : ShortArray;
@@ -503,12 +492,4 @@ class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
         )
         .setBufferSizeInBytes(mAudioSampleRate)
         .build();
-
-    override fun onMarkerReached(track: AudioTrack?) {
-        if(track!!.notificationMarkerPosition >= mNumberFramesWritten)
-            streamNotificationListener?.streamFinished(this)
-    }
-
-    override fun onPeriodicNotification(track: AudioTrack?) {
-    }
 }
