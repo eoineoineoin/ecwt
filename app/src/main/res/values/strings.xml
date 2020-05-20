@@ -11,6 +11,7 @@
     <string name="training_button_label">Koch Training</string>
     <string name="settings_button_label">Settings</string>
     <string name="retry_training_button_label">Try Again</string>
+    <string name="next_training_button_label">Add a character</string>
     <string name="start_training_button_label">Touch to Start</string>
     <string name="setting_tone_frequency_label">Tone Frequency</string>
     <string name="setting_wpm_label">Words per Minute</string>

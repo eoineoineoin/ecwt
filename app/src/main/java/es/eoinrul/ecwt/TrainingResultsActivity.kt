@@ -45,6 +45,13 @@ class TrainingResultsActivity : AppCompatActivity() {
         startActivity(intent);
     }
 
+    fun onAddCharacterButtonPressed(view : View) {
+        val intent = Intent(this, TrainingActivity::class.java).apply {
+            putExtra(TRAINING_LESSON_INDEX, intent.getIntExtra(TRAINING_LESSON_INDEX, 0) + 1)
+        }
+        startActivity(intent);
+    }
+
     //TODO Would like to write tests for this
     private fun levenshteinDistance(a : String, b : String) : Int {
         if(a.isEmpty()) return b.length
