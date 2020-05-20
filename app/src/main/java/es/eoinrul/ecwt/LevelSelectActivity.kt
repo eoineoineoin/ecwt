@@ -27,7 +27,7 @@ class LevelSelectActivity : AppCompatActivity(),
 
     override fun onListFragmentInteraction(lesson: KochLessonDefinitions.KochLesson?) {
         if(lesson != null) {
-            // Remember the last lesson that was run
+            // Remember the last lesson that was run // TODO This should be in the training
             var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
             val lastLessonPrefKey = getString(R.string.setting_last_lesson_key)
             sharedPreferences.edit().putInt(lastLessonPrefKey, lesson.lessonIndex).apply()

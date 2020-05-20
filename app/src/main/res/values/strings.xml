@@ -34,6 +34,7 @@
     <string name="setting_koch_lesson_vary_label">Variable group length</string>
     <string name="setting_koch_lesson_vary_off">Always groups of 5</string>
     <string name="setting_koch_lesson_vary_on">Groups between 2 and 6 characters</string>
+    <string name="training_results_next_lesson_heading">Start next lesson:</string>
 
     <string-array name="tone_frequency_strings">
         <item>400Hz</item>

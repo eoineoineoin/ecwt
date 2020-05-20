@@ -24,11 +24,25 @@ object KochLessonDefinitions {
             return LessonOrder.substring(lessonIndex + 1 , lessonIndex + 2)
         }
 
+        // Return a string containing the new character introduced in this lesson
+        // The first lesson contains two characters. Lesson indices created past the end of the
+        // defined set of characters will return an empty string
+        fun newCharacters() : String {
+            try {
+                if(lessonIndex == 0) {
+                    return LessonOrder.substring(0, 1) + " " + LessonOrder.substring(1, 2)
+                } else {
+                    return LessonOrder.substring(lessonIndex + 1, lessonIndex + 2)
+                }
+            } catch (e : StringIndexOutOfBoundsException) {
+                return ""
+            }
+        }
+
+        // Return a string containing the dots and dashes for the characters
+        // introduced in this lesson
         fun newSignsAsString() : String {
-            var newChars = if(lessonIndex == 0) {
-                LessonOrder.substring(0, 1) + " " + LessonOrder.substring(1, 2)
-            } else { LessonOrder.substring(lessonIndex + 1 , lessonIndex + 2) }
-            return SequenceToString(StringToSoundSequence(newChars))
+            return SequenceToString(StringToSoundSequence(newCharacters()))
         }
 
         // Get the lesson number, for display in the UI
