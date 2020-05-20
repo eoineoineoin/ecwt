@@ -38,7 +38,13 @@ class TrainingLevelRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val lessonIndex = if(position == 0) mLastLessonIndex else position - 1
+        // If we have remembered the last lesson, there's a "fake" item at position 0
+        // to allow fast continuing. Then we need to offset the position, to account for it
+        var positionToIndexOffset = if(mLastLessonIndex > 0) 1 else 0
+        val lessonIndex = if(position == 0 && mLastLessonIndex > 0) {
+            mLastLessonIndex
+        } else position - positionToIndexOffset
+
         val lesson = mLessons[lessonIndex]
         holder.mIdView.text = lesson.indexForHumans().toString()
         holder.mContentView.text = lesson.toString()
@@ -50,7 +56,12 @@ class TrainingLevelRecyclerViewAdapter(
         }
     }
 
-    override fun getItemCount(): Int =  mLessons.size + 1 // +1 for the "Last lesson" button
+    override fun getItemCount(): Int {
+        if (mLastLessonIndex > 0) {
+            return mLessons.size + 1 // +1 for the "last lesson" button
+        }
+        return mLessons.size // No point showing the "last lesson" if we never did one before
+    }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.item_number
