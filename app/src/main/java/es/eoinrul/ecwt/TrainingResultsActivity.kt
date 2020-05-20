@@ -40,7 +40,7 @@ class TrainingResultsActivity : AppCompatActivity() {
 
     fun onTryAgainButtonPressed(view : View) {
         val intent = Intent(this, TrainingActivity::class.java).apply {
-            putExtra(TRAINING_ALPHABET, intent.getStringExtra(TRAINING_ALPHABET))
+            putExtra(TRAINING_LESSON_INDEX, intent.getIntExtra(TRAINING_LESSON_INDEX, 0))
         }
         startActivity(intent);
     }

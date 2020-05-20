@@ -22,7 +22,8 @@ class TrainingActivity : AppCompatActivity(),
 
         initSoundPlayer()
 
-        mAlphabet = intent.getStringExtra(TRAINING_ALPHABET)!!;
+        var lessionIndex = intent.getIntExtra(TRAINING_LESSON_INDEX, 0)
+        mAlphabet = KochLessonDefinitions.KochLesson(lessionIndex).getAlphabet()
         mEnteredTextView = findViewById<EditText>(R.id.enteredText);
     }
 
@@ -61,10 +62,12 @@ class TrainingActivity : AppCompatActivity(),
                 // The input text has a leading space that we don't want to grade
                 var inputText = mEnteredTextView.text.toString().trim()
 
+                var lessonIndex = intent.getIntExtra(TRAINING_LESSON_INDEX, 0)
+
                 val intent = Intent(activityContext, TrainingResultsActivity::class.java).apply {
                     putExtra(TRAINING_ANSWER, lessonText)
                     putExtra(TRAINING_COPIED, inputText)
-                    putExtra(TRAINING_ALPHABET, mAlphabet) // For a "retry" button
+                    putExtra(TRAINING_LESSON_INDEX, lessonIndex) // For a "retry/next" button
                 }
                 startActivity(intent);
             }

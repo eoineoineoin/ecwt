@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.eoinrul.ecwt.R
 
-const val TRAINING_ALPHABET = "es.eoinrul.ecwt.TRAINING_ALPHABET"
+const val TRAINING_LESSON_INDEX = "es.eoinrul.ecwt.TRAINING_LESSON_INDEX"
 
 class LevelSelectActivity : AppCompatActivity(),
     TrainingLevelFragment.OnListFragmentInteractionListener {
@@ -34,7 +34,7 @@ class LevelSelectActivity : AppCompatActivity(),
         }
 
         val intent = Intent(this, TrainingActivity::class.java).apply {
-            putExtra(TRAINING_ALPHABET, lesson?.getAlphabet())
+            putExtra(TRAINING_LESSON_INDEX, lesson?.lessonIndex)
         }
         startActivity(intent);
     }
