@@ -8,6 +8,7 @@ import android.media.AudioTrack
 import android.view.KeyEvent
 import androidx.preference.PreferenceManager
 import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 import kotlin.math.PI
 import kotlin.math.min
@@ -419,16 +420,29 @@ class DitDahSoundStream : AudioTrack.OnPlaybackPositionUpdateListener {
 
     fun quit() {
         mShouldQuit = true;
+        // Add a symbol to the queue to ensure the worker thread is released to see the quit signal
         mSymbolQueue.put(SoundTypes.WORD_SPACE)
     }
 
     fun makeSoundsWorkerThreadFunc() {
         while(true) {
-            val sym : SoundTypes = mSymbolQueue.take()
+            // In order to avoid underruns, we want to call stop() on our AudioTrack if there's
+            // no new symbols incoming. Wait to get an item from the queue for the length of half
+            // a dit; if there's nothing ready, stop the track, and wait indefinitely
+            val ditLengthSeconds = mDitSound.size.toFloat() / mAudioSampleRate.toFloat()
+            val waitDuration = (1000.0f * 0.5f * ditLengthSeconds).toLong()
+            var sym : SoundTypes? = mSymbolQueue.poll(waitDuration, TimeUnit.MILLISECONDS)
+
+            if(sym == null) {
+                mSoundPlayer.stop()
+                // Now that the audio player has stopped, we can wait indefinitely
+                sym = mSymbolQueue.take()
+            }
+
             if(mShouldQuit)
                 return;
 
-            val soundToWrite = when (sym) {
+            val soundToWrite = when (sym!!) {
                 SoundTypes.DIT -> mDitSound
                 SoundTypes.DAH -> mDahSound
                 SoundTypes.LETTER_SPACE -> mCharacterSpacingSound
