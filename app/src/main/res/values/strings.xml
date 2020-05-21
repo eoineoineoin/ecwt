@@ -6,10 +6,12 @@
     <string name="training_activity_label">Training Session</string>
     <string name="training_results_activity_label">Lesson Results</string>
     <string name="settings_activity_label">Settings</string>
+    <string name="about_activity_label">About</string>
 
     <string name="sounder_button_label">Sounder</string>
     <string name="training_button_label">Koch Training</string>
     <string name="settings_button_label">Settings</string>
+    <string name="about_button_label">About</string>
     <string name="retry_training_button_label">Try Again</string>
     <string name="next_training_button_label">Add a character</string>
     <string name="start_training_button_label">Touch to Start</string>
@@ -35,6 +37,19 @@
     <string name="setting_koch_lesson_vary_off">Always groups of 5</string>
     <string name="setting_koch_lesson_vary_on">Groups between 2 and 6 characters</string>
     <string name="training_results_next_lesson_heading">Start next lesson:</string>
+    <string name="about_heading">About</string>
+    <string name="about_feedback_heading">Feedback</string>
+    <string name="about_feedback_text">Any and all feedback is appreciated. Send your love and
+        comments to ecwt@eoinrul.es</string>
+    <string name="about_method_text">This application teaches morse using the Koch method. In this
+        method, each character is sent at the speed you would hear it in a normal transmission but
+        characters are introduced to you slowly. This way, you build up familiarity with what each
+        character sounds like.\n\nThe first lesson starts with two characters and each subsequent
+        lesson introduces a new one. Your task is to listen to the transmitted sounds and transcribe
+        them. Once the lesson ends, you\&apos;ll be presented with a short summary of how well you
+        scored. Once you can reliably identify 90% of the characters in a lesson, it might be time
+        to move on to the next character.
+    </string>
 
     <string-array name="tone_frequency_strings">
         <item>400Hz</item>

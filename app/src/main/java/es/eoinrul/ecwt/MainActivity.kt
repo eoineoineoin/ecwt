@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openSettings(view: View) {
-        val intent = Intent(this, SettingsActivity::class.java);
-        startActivity(intent);
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     fun openSounder(view: View) {
@@ -34,8 +34,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openKochLevelSelect(view :View) {
-        val intent = Intent(this, LevelSelectActivity::class.java).apply {
-        }
+        val intent = Intent(this, LevelSelectActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun openAboutActivity(view : View) {
+        val intent = Intent(this, AboutActivity::class.java)
         startActivity(intent)
     }
 }

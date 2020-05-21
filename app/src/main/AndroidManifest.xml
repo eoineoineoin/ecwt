@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TrainingResultsActivity"
+        <activity android:name=".AboutActivity"
+            android:label="@string/about_activity_label"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TrainingResultsActivity"
             android:label="@string/training_results_activity_label"
-            android:parentActivityName=".LevelSelectActivity"
-            ></activity>
+            android:parentActivityName=".LevelSelectActivity" />
         <activity
             android:name=".TrainingActivity"
             android:label="@string/training_activity_label"
@@ -25,13 +28,11 @@
             android:name=".SounderActivity"
             android:label="@string/sounder_activity_label"
             android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="stateAlwaysVisible">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_activity_label"
-            android:parentActivityName=".MainActivity">
-        </activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
