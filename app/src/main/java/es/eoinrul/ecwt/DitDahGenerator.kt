@@ -67,7 +67,6 @@ fun StringToSoundSequence(s : String) : List<SoundTypes> {
             SoundTypes.DAH,
             SoundTypes.DAH,
             SoundTypes.DIT,
-            SoundTypes.DIT,
             SoundTypes.LETTER_SPACE
         )
         'H' -> listOf(
@@ -283,6 +282,14 @@ fun StringToSoundSequence(s : String) : List<SoundTypes> {
             SoundTypes.DAH,
             SoundTypes.DAH,
             SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '/' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
             SoundTypes.DIT,
             SoundTypes.LETTER_SPACE
         )
