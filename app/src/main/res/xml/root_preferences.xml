@@ -2,13 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/settings_sender_heading">
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="switch_preference_1"
-            android:summary="OMG"
-            android:summaryOff="NOPE"
-            android:summaryOn="YEAH"
-            android:title="Switch preference" />
 
         <ListPreference
             android:defaultValue="600"
@@ -56,5 +49,20 @@
             android:title="@string/setting_koch_lesson_vary_label" />
 
     </PreferenceCategory>
+
+    <!-- This can be uncommented to enable some settings to make testing easier -->
+    <!-- There is probably a better way to do this -->
+    <!--
+    <PreferenceCategory android:title="Debug">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="debug_override_lesson_length"
+            android:summaryOff="Use configured length"
+            android:summaryOn="Short lessons"
+            android:title="Override lesson length" />
+
+    </PreferenceCategory>
+    -->
 
 </PreferenceScreen>

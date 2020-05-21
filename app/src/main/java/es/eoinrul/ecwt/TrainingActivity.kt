@@ -91,11 +91,14 @@ class TrainingActivity : AppCompatActivity(),
         }
 
         var sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val quickTestingSwitchEnabled = sharedPrefs.getBoolean("switch_preference_1", false)
-        val numberOfWords = if(!quickTestingSwitchEnabled) {
+        val shortLessonDebug = sharedPrefs.getBoolean("debug_override_lesson_length", false)
+        val numberOfWords = if(shortLessonDebug) {
+            // This makes it much faster to test functionality, if enabled in preferences
+            2
+        } else {
             // This is only an approximation
             generatorSettings.farnsworthWordsPerMinute * lessonLengthInMinutes
-        } else { 2 } // This is just for quicker testing; remove eventually
+        }
 
         var lessonText = String()
         var rng = Random.Default
