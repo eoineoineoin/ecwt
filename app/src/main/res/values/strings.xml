@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ecwt</string>
+    <string name="app_name">MorseTrainer</string>
 
     <string name="sounder_activity_label">Sounder</string>
     <string name="level_select_activity_label">Select Lesson</string>
