@@ -48,6 +48,14 @@
             android:summaryOn="@string/setting_koch_lesson_vary_on"
             android:title="@string/setting_koch_lesson_vary_label" />
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/setting_koch_lesson_train_new_more"
+            android:summaryOn="@string/setting_koch_lesson_train_new_on"
+            android:summaryOff="@string/setting_koch_lesson_train_new_off"
+            android:title="@string/setting_koch_lesson_train_new_label" />
+
+
     </PreferenceCategory>
 
     <!-- This can be uncommented to enable some settings to make testing easier -->

@@ -27,6 +27,7 @@
     <string name="setting_last_lesson_key">last_lesson_index</string>
     <string name="setting_koch_lesson_length_key">koch_lesson_length</string>
     <string name="setting_koch_lesson_vary_word_size_key">koch_lesson_vary_word_size</string>
+    <string name="setting_koch_lesson_train_new_more">koch_lesson_train_new</string>
 
     <string name="training_results_summary">Score: %d%%\nMistakes: %d</string>
     <string name="training_results_error">Error: No input?</string>
@@ -36,6 +37,9 @@
     <string name="setting_koch_lesson_vary_label">Variable group length</string>
     <string name="setting_koch_lesson_vary_off">Always groups of 5</string>
     <string name="setting_koch_lesson_vary_on">Groups between 2 and 6 characters</string>
+    <string name="setting_koch_lesson_train_new_label">Use new letters more frequently</string>
+    <string name="setting_koch_lesson_train_new_on">New letters are more frequent</string>
+    <string name="setting_koch_lesson_train_new_off">All letters have same chance</string>
     <string name="training_results_next_lesson_heading">Start next lesson:</string>
     <string name="about_heading">About</string>
     <string name="about_feedback_heading">Feedback</string>

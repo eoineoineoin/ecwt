@@ -100,13 +100,27 @@ class TrainingActivity : AppCompatActivity(),
             generatorSettings.farnsworthWordsPerMinute * lessonLengthInMinutes
         }
 
+        // If selected in preferences, modify the alphabet used for the lesson so that
+        // the most recently added character is more likely to occur; this helps a lot
+        // in later lessons, since you are tested on the new character more frequently
+        var lessonAlphabet = mAlphabet
+        val invCharacterChance = 7 // Feels about right. A bit less frequent than once per word
+        if(sharedPrefs.getBoolean("koch_lesson_train_new", true)
+            && mAlphabet.length > invCharacterChance) {
+            var lastChar = mAlphabet.substring(mAlphabet.length - 1)
+            lessonAlphabet = mAlphabet.repeat(invCharacterChance - 1)
+            lessonAlphabet += lastChar.repeat(mAlphabet.length - invCharacterChance)
+        }
+
+
+        // Create the actual text used for the lesson
         var lessonText = String()
         var rng = Random.Default
         for(i in 0 until numberOfWords) {
             val thisWordSize = rng.nextInt(minWordSize, maxWordSize + 1)
             for(c in 0 until thisWordSize) {
-                val randomLetterIndex = rng.nextInt(0, mAlphabet.length)
-                lessonText += mAlphabet.substring(randomLetterIndex, randomLetterIndex + 1)
+                val randomLetterIndex = rng.nextInt(0, lessonAlphabet.length)
+                lessonText += lessonAlphabet.substring(randomLetterIndex, randomLetterIndex + 1)
             }
             lessonText += " "
         }
