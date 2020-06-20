@@ -1,0 +1,1 @@
+Use the Koch method to learn morse code. Each session, the app will play random morse code characters, and score you based on how accurately you transcribe them. The first lesson starts with only two letters, with each new lesson adding an extra character.
