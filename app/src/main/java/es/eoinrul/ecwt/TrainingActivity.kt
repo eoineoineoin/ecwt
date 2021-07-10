@@ -25,6 +25,7 @@ class TrainingActivity : AppCompatActivity(),
         var lessionIndex = intent.getIntExtra(TRAINING_LESSON_INDEX, 0)
         mAlphabet = KochLessonDefinitions.KochLesson(lessionIndex).getAlphabet()
         mEnteredTextView = findViewById<EditText>(R.id.enteredText);
+        mEnteredTextView?.setOnFocusChangeListener(mLessonStarter);
     }
 
     private fun initSoundPlayer() {
@@ -74,7 +75,7 @@ class TrainingActivity : AppCompatActivity(),
         }, secondsPauseBeforeLessonEnd * 1000)
     }
 
-    fun onStartTrainingClicked(view : View) {
+    fun onStartTrainingClicked() {
         if(mLessonStarted)
             return
 
@@ -149,4 +150,10 @@ class TrainingActivity : AppCompatActivity(),
     private var mLessonText : String = ""
 
     private var mLessonStartDelayTimer : Timer = Timer()
+
+    private val mLessonStarter = object : View.OnFocusChangeListener {
+        override fun onFocusChange(_v: View?, hasFocus: Boolean) {
+            onStartTrainingClicked();
+        }
+    }
 }
