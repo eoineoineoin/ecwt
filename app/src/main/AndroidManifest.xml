@@ -27,8 +27,8 @@
         <activity
             android:name=".SounderActivity"
             android:label="@string/sounder_activity_label"
-            android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_activity_label"
