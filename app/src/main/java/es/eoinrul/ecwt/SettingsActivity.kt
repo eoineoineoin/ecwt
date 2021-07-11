@@ -42,9 +42,14 @@ class SettingsActivity : AppCompatActivity(),
         if(newSettings.toneFrequency != mLastSenderSettings.toneFrequency
             || newSettings.wordsPerMinute != mLastSenderSettings.wordsPerMinute
             || newSettings.farnsworthWordsPerMinute != mLastSenderSettings.farnsworthWordsPerMinute) {
+
             mSampleOutputStream?.quit()
+
             var sampleOutputStream = DitDahSoundStream(newSettings)
-            sampleOutputStream.enqueue(StringToSoundSequence("CQ"))
+
+            // Add a small space at the start to help distinguish sounds when changing settings rapidly:
+            var demoSound = listOf(SoundTypes.LETTER_SPACE) + StringToSoundSequence("CQ");
+            sampleOutputStream.enqueue(demoSound);
             mSampleOutputStream = sampleOutputStream
             mLastSenderSettings = newSettings
         }

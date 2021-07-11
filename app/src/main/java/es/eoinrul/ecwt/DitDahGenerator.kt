@@ -425,6 +425,10 @@ class DitDahSoundStream {
 
     fun quit() {
         mShouldQuit = true;
+
+        // Set the volume to zero to immediately stop hearing any samples that have been queued:
+        mSoundPlayer.setVolume(0.0f);
+
         // Add a symbol to the queue to ensure the worker thread is released to see the quit signal
         mSymbolQueue.put(SoundTypes.WORD_SPACE)
     }
