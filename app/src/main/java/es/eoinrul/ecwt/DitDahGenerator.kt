@@ -402,7 +402,6 @@ class DitDahSoundStream {
         mWordSpacingSound = ShortArray(wordSpacingInSamples - intraCharacterSpacingInSamples);
         mCharacterSpacingSound = ShortArray(interCharacterSpacingInSamples - intraCharacterSpacingInSamples);
 
-        //TODO: Ramp up? Make sound nicer? Seems to have clipping - just in the emulator?
         val invSampleRate = 1.0 / mAudioSampleRate.toFloat()
         for(i in 0 until ditLengthInSamples) {
             mDitSound[i] = (0x7fff.toFloat() * sin( 2.0f * PI * i * config.toneFrequency * invSampleRate)).toShort()
@@ -410,6 +409,20 @@ class DitDahSoundStream {
 
         for(i in 0 until dahLengthInSamples) {
             mDahSound[i] = (0x7fff.toFloat() * sin(2.0f * PI * i * config.toneFrequency * invSampleRate) ).toShort()
+        }
+
+        // Apply an attack and release envelope to each of the samples to avoid a pop
+        // in the audio that's generated. Empirically, 8ms seems to eliminate it while
+        // still being fast enough that it works on the fastest WPM setting:
+        var attackReleaseDuration = 0.008f;
+        val attackReleaseTimeInSamples = (attackReleaseDuration * mAudioSampleRate).toInt();
+        for(i in 0 until attackReleaseTimeInSamples) {
+            val frac = i.toFloat() / attackReleaseTimeInSamples.toFloat();
+            mDitSound[i] = (frac * mDitSound[i]).toShort()
+            mDahSound[i] = (frac * mDahSound[i]).toShort()
+
+            mDitSound[ditLengthInSamples - i - 1] = (frac * mDitSound[ditLengthInSamples - i - 1]).toShort();
+            mDahSound[dahLengthInSamples - i - 1] = (frac * mDahSound[dahLengthInSamples - i - 1]).toShort();
         }
 
         // Create a thread that will pull symbols off our queue and write samples to the audio
