@@ -10,35 +10,135 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16px"
-        android:orientation="vertical">
+        android:layout_margin="26px"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:paddingBottom="10dp">
 
-        <Button
-            android:id="@+id/sounder"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/lesson_select_margin"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:onClick="openSounder"
-            android:text="@string/sounder_button_label" />
+            android:paddingBottom="20dp"
+            app:cardCornerRadius="4dp">
 
-        <Button
-            android:id="@+id/button2"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_menu_sounder" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="@string/sounder_button_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/lesson_select_margin"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:onClick="openKochLevelSelect"
-            android:text="@string/training_button_label" />
+            app:cardCornerRadius="4dp">
 
-        <Button
-            android:id="@+id/button3"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_menu_training" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="@string/training_button_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/lesson_select_margin"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:onClick="openSettings"
-            android:text="@string/settings_button_label" />
+            app:cardCornerRadius="4dp">
 
-        <Button
-            android:id="@+id/button4"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_menu_settings" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:text="@string/settings_button_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/lesson_select_margin"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:onClick="openAboutActivity"
-            android:text="@string/about_button_label" />
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_menu_about" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_button_label"
+                    android:paddingLeft="20dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
