@@ -439,8 +439,10 @@ class DitDahSoundStream {
     fun quit() {
         mShouldQuit = true;
 
-        // Set the volume to zero to immediately stop hearing any samples that have been queued:
-        mSoundPlayer.setVolume(0.0f);
+        // Pause and flush the audio player, which has the effect of stopping
+        // playback immediately.
+        mSoundPlayer.pause();
+        mSoundPlayer.flush();
 
         // Add a symbol to the queue to ensure the worker thread is released to see the quit signal
         mSymbolQueue.put(SoundTypes.WORD_SPACE)
@@ -448,37 +450,57 @@ class DitDahSoundStream {
 
     fun makeSoundsWorkerThreadFunc() {
         while(true) {
-            // In order to avoid underruns, we want to call stop() on our AudioTrack if there's
-            // no new symbols incoming. Wait to get an item from the queue for the length of a dit
-            //  and a half; if there's nothing ready, stop the track, and wait indefinitely
-            val ditLengthSeconds = mDitSound.size.toFloat() / mAudioSampleRate.toFloat()
-            val waitDuration = (1000.0f * 1.5f * ditLengthSeconds).toLong()
-            var sym : SoundTypes? = mSymbolQueue.poll(waitDuration, TimeUnit.MILLISECONDS)
+            // Try to get a symbol from the queue:
+            var didWait : Boolean = false
+            var sym : SoundTypes? = mSymbolQueue.poll(1, TimeUnit.MILLISECONDS)
 
             if(sym == null) {
-                // We didn't get a symbol quickly enough; stop the stream:
-                mSoundPlayer.stop()
-                // Then tell any listener, give them the opportunity to restart or quit:
+                // We didn't get a symbol quickly enough; this happens during the
+                // interactive sounder mode, where the user is pressing keys or
+                // when we have hit the end of a sequence.
+                // Tell any listener, give them the opportunity to restart or quit:
                 streamNotificationListener?.symbolsExhausted(this)
                 // Now we can wait indefinitely:
+                didWait = true
                 sym = mSymbolQueue.take()
             }
 
             if(mShouldQuit)
-                return;
+                return
 
-            val soundToWrite = when (sym!!) {
+            val soundToWrite : ShortArray = when (sym!!) {
                 SoundTypes.DIT -> mDitSound
                 SoundTypes.DAH -> mDahSound
                 SoundTypes.LETTER_SPACE -> mCharacterSpacingSound
                 SoundTypes.WORD_SPACE -> mWordSpacingSound
             }
 
-            mSoundPlayer.write(soundToWrite, 0, soundToWrite.size)
+            if (didWait) {
+                // If we had to wait for a character, that means we are
+                // in interactive mode. Sometimes, a pop can be heard at
+                // the start, so add an extra bit of silence, to fill up
+                // the audio buffers. If the buffer is smaller than this,
+                // it should be OK, since we just want leading silence:
+                mSoundPlayer.write(mCharacterSpacingSound, 0, mCharacterSpacingSound.size)
+            }
 
-            // If this is the first symbol, we'll need to start playing.
-            if (mSoundPlayer.playState != AudioTrack.PLAYSTATE_PLAYING)
-                mSoundPlayer.play()
+            // Now attempt to write the real sound:
+            var numWritten = mSoundPlayer.write(soundToWrite, 0, soundToWrite.size)
+            // And start the audio playing:
+            mSoundPlayer.play();
+
+            if (numWritten != soundToWrite.size) {
+                mSoundPlayer.write(
+                    soundToWrite,
+                    numWritten,
+                    soundToWrite.size - numWritten,
+                    AudioTrack.WRITE_BLOCKING
+                )
+            }
+
+            // Now we can stop the audio player; it won't stop the audio
+            // immediately, instead once the last write() has been output
+            mSoundPlayer.stop()
         }
     }
 
@@ -514,6 +536,7 @@ class DitDahSoundStream {
                 .setChannelMask(AudioFormat.CHANNEL_OUT_MONO)
                 .build()
         )
+        .setTransferMode(AudioTrack.MODE_STREAM)
         .setBufferSizeInBytes(mAudioSampleRate)
         .build();
 }
