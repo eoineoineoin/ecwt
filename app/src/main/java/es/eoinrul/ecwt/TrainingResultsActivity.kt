@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.preference.PreferenceManager
-import kotlinx.android.synthetic.main.activity_level_select.*
-import kotlin.math.min
-
+import androidx.core.text.HtmlCompat
 
 class TrainingResultsActivity : AppCompatActivity() {
 
@@ -16,42 +13,24 @@ class TrainingResultsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_training_results)
 
-        var userInputText = intent.getStringExtra(TRAINING_COPIED)?.toLowerCase()
-        var correctText = intent.getStringExtra(TRAINING_ANSWER)?.toLowerCase()
-
-        if(userInputText != null && correctText != null) {
-            var editDistance = levenshteinDistance(correctText, userInputText)
-
-            var fractionCorrect = (correctText.length - editDistance).toFloat() / correctText.length.toFloat()
-            var percentCorrect = if (editDistance == 0) {
-                100
-            } else {
-                (fractionCorrect * 100.0f).toInt()
-            }
-
-            findViewById<TextView>(R.id.resultSummary).text = getString(R.string.training_results_summary, percentCorrect, editDistance)
-        }
-        else {
-            findViewById<TextView>(R.id.resultSummary).text =
-                getString(R.string.training_results_error)
-        }
-
-        // TODO Could have a per-character breakdown here
+        val userInputText = intent.getStringExtra(TRAINING_COPIED)?.toLowerCase()
+        val correctText = intent.getStringExtra(TRAINING_ANSWER)?.toLowerCase()
+        displayResults(userInputText, correctText)
 
         // Setup the "next level" button
-        mNextLevelNumberText = findViewById<TextView>(R.id.trainingNextLevelNumber);
-        mNextLevelContentsText = findViewById<TextView>(R.id.trainingNextLevelContents);
+        mNextLevelNumberText = findViewById<TextView>(R.id.trainingNextLevelNumber)
+        mNextLevelContentsText = findViewById<TextView>(R.id.trainingNextLevelContents)
 
         val nextLevelIndex = intent.getIntExtra(TRAINING_LESSON_INDEX, 0) + 1
         val nextLesson = KochLessonDefinitions.KochLesson(nextLevelIndex)
-        var nextLessonCharacters = nextLesson.newCharacters()
+        val nextLessonCharacters = nextLesson.newCharacters()
         if(!nextLessonCharacters.isEmpty()) {
             mNextLevelNumberText?.text = nextLesson.indexForHumans().toString()
             mNextLevelContentsText?.text = nextLesson.newCharacters() + "  " + nextLesson.newSignsAsString()
         } else {
             // Next lesson didn't add any new characters, so we must be on the last lesson.
             // Hide the "next" button, since there's nothing it could reasonably do
-            var nextLessonContainer = findViewById<View>(R.id.trainingNextLevelContainer)
+            val nextLessonContainer = findViewById<View>(R.id.trainingNextLevelContainer)
             nextLessonContainer.visibility = View.GONE
         }
     }
@@ -60,36 +39,162 @@ class TrainingResultsActivity : AppCompatActivity() {
         val intent = Intent(this, TrainingActivity::class.java).apply {
             putExtra(TRAINING_LESSON_INDEX, intent.getIntExtra(TRAINING_LESSON_INDEX, 0))
         }
-        startActivity(intent);
+        startActivity(intent)
     }
 
     fun onAddCharacterButtonPressed(view : View) {
         val intent = Intent(this, TrainingActivity::class.java).apply {
             putExtra(TRAINING_LESSON_INDEX, intent.getIntExtra(TRAINING_LESSON_INDEX, 0) + 1)
         }
-        startActivity(intent);
+        startActivity(intent)
+    }
+
+    private fun displayResults(userInputText : String?, correctText : String?) {
+        if(userInputText == null || correctText == null) {
+            findViewById<TextView>(R.id.resultSummary).text =
+                getString(R.string.training_results_error)
+            return
+        }
+
+        val comparisonResult = levenshteinDistance(userInputText, correctText)
+        val editDistance = comparisonResult.mEditDistance
+
+        val fractionCorrect = (correctText.length - editDistance).toFloat() / correctText.length.toFloat()
+        val percentCorrect = if (editDistance == 0) {
+            100
+        } else {
+            maxOf(0, (fractionCorrect * 100.0f).toInt())
+        }
+
+        findViewById<TextView>(R.id.resultSummary).text = getString(R.string.training_results_summary, percentCorrect, editDistance)
+
+        var detailContainer = findViewById<TextView>(R.id.resultDetails)
+        detailContainer.text = HtmlCompat.fromHtml(formatEditDetails(comparisonResult.mEdits), 0)
+    }
+
+    private fun formatColorId(c : Int) : String {
+        return "<font color=\"#" + Integer.toHexString(getColor(c)).substring(2) + "\">"
+    }
+
+    private fun formatEditDetails(edits : List<SingleEdit>) : String {
+        var formattedEditDetail = ""
+        for(edit in edits) {
+            formattedEditDetail += when (edit.mEditType) {
+                EditType.NO_CHANGE -> {
+                    formatColorId(R.color.colorResultDetailCorrect) + edit.mCharInfo + "</font>"
+                }
+                EditType.SUBSTITUTE -> {
+                    formatColorId(R.color.colorResultDetailIncorrect) +
+                        "<strike>" + edit.mCharInfo + "</strike>" +
+                        edit.mReplacementChar + "</font>"
+                }
+                EditType.DELETE -> {
+                    formatColorId(R.color.colorResultDetailIncorrect) +
+                    "<strike>" + edit.mCharInfo + "</strike>" + "</font>"
+                }
+                else -> { // INSERT
+                    formatColorId(R.color.colorResultDetailIncorrect) + edit.mCharInfo + "</font>"
+                }
+            }
+        }
+
+        return formattedEditDetail
+    }
+
+    enum class EditType {
+        NO_CHANGE,
+        SUBSTITUTE,
+        INSERT,
+        DELETE,
+    }
+
+    class SingleEdit {
+        val mEditType: EditType
+
+        // The correct character, or the one to modify/insert/delete
+        val mCharInfo: String
+
+        // With SUBSTITUTE, the character that is inserted
+        val mReplacementChar: String
+
+        constructor(editType : EditType, char1 : Char, char2 : Char = Char.MIN_VALUE)
+        {
+            mEditType = editType
+            mCharInfo = if (char1 == ' ') " · " else char1.toString()
+            mReplacementChar = if (char2 == ' ') " · " else char2.toString()
+        }
+    }
+
+    class ComparisonResult (
+        val mEditDistance : Int,
+        val mEdits : List<SingleEdit>
+    )
+
+    private fun strToEdits(type : EditType, s : String) : List<SingleEdit>
+    {
+        var ret : MutableList<SingleEdit> = mutableListOf<SingleEdit>()
+        for(c in s) {
+            ret.add(SingleEdit(type, c))
+        }
+        return ret
     }
 
     //TODO Would like to write tests for this
-    private fun levenshteinDistance(a : String, b : String) : Int {
-        if(a.isEmpty()) return b.length
-        if(b.isEmpty()) return a.length
+    private fun levenshteinDistance(a : String, b : String) : ComparisonResult {
+        if(a.isEmpty()) return ComparisonResult(b.length, strToEdits(EditType.INSERT, b))
+        if(b.isEmpty()) return ComparisonResult(a.length, strToEdits(EditType.DELETE, a))
 
         var costMatrix = Array<Array<Int>>(a.length) {Array<Int>(b.length) {0} }
-        var getCost = { i : Int, j : Int -> if(i < 0 && j < 0) 0 else if(i < 0) j + 1 else if(j < 0) i + 1 else costMatrix[i][j] }
+        val getCost = { i : Int, j : Int -> if(i < 0 && j < 0) 0 else if(i < 0) j + 1 else if(j < 0) i + 1 else costMatrix[i][j] }
 
         for(i in a.indices) {
             for (j in b.indices) {
-                var substitutionCost = getCost(i -1, j - 1) + if(a[i] == b[j]) 0 else 1
-                var insertionCost = getCost(i, j - 1) + 1
-                var deletionCost = getCost(i - 1, j) + 1
+                val substitutionCost = getCost(i - 1, j - 1) + if (a[i] == b[j]) 0 else 1
+                val insertionCost = getCost(i, j - 1) + 1
+                val deletionCost = getCost(i - 1, j) + 1
                 costMatrix[i][j] = minOf(substitutionCost, insertionCost, deletionCost)
             }
         }
 
-        return costMatrix[a.length - 1][b.length - 1]
-    }
+        // Now, walk the cost matrix backwards to build the minimal edits
+        var curI : Int = a.length - 1
+        var curJ : Int = b.length - 1
+        val edits : MutableList<SingleEdit> = arrayListOf()
 
-    private var mNextLevelNumberText : TextView? = null;
-    private var mNextLevelContentsText : TextView? = null;
+        while(curI >= 0 || curJ >= 0) {
+            val curCost = getCost(curI, curJ)
+            val substitutionCost = getCost(curI - 1, curJ - 1)
+            val insertionCost = getCost(curI, curJ - 1)
+            val deletionCost = getCost(curI - 1, curJ)
+            val minCost = minOf(substitutionCost, insertionCost, deletionCost)
+            if(minCost == substitutionCost && curCost == substitutionCost && curJ >= 0) {
+                // Equal
+                edits.add(SingleEdit(EditType.NO_CHANGE, b[curJ]))
+                curI -= 1
+                curJ -= 1
+            }
+            else if(minCost == substitutionCost && curI >= 0 && curJ >= 0) {
+                // Substitute
+                edits.add(SingleEdit(EditType.SUBSTITUTE, a[curI], b[curJ]))
+                curI -= 1
+                curJ -= 1
+            }
+            else if(minCost == insertionCost && curJ >= 0) {
+                // Insert
+                edits.add(SingleEdit(EditType.INSERT, b[curJ]))
+                curJ -= 1
+            }
+            else {
+                // Delete
+                edits.add(SingleEdit(EditType.DELETE, a[curI]))
+                curI -= 1
+            }
+        }
+
+        return ComparisonResult(costMatrix[a.length - 1][b.length - 1],
+            edits.reversed())
+        }
+
+    private var mNextLevelNumberText : TextView? = null
+    private var mNextLevelContentsText : TextView? = null
 }

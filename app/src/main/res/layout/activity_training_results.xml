@@ -1,101 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TrainingResultsActivity">
-
-    <TextView
-        android:id="@+id/resultSummary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="onTryAgainButtonPressed"
-        android:text="@string/retry_training_button_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultSummary" />
-
-    <LinearLayout
-        android:id="@+id/trainingNextLevelContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@color/lesson_select_background"
-        android:elevation="2dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="center"
-        android:onClick="onAddCharacterButtonPressed"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="4dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/resultSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/training_results_next_lesson_heading"
-            android:textSize="24sp" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/trainingNextLevelNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="100"
-                android:text="N:"
-                android:textAlignment="textEnd"
-                android:textColor="?android:attr/textColorSecondary"
-                android:textSize="24sp" />
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:background="?android:attr/listDivider" />
-
-            <TextView
-                android:id="@+id/trainingNextLevelContents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="300"
-                android:text="Q --.-"
-                android:textAlignment="center"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <Space
+        <TextView
+            android:id="@+id/resultDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="4dp" />
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resultSummary" />
 
-    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:onClick="onTryAgainButtonPressed"
+            android:text="@string/retry_training_button_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resultDetails" />
+
+        <LinearLayout
+            android:id="@+id/trainingNextLevelContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/lesson_select_background"
+            android:elevation="2dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:onClick="onAddCharacterButtonPressed"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="4dp" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/training_results_next_lesson_heading"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/trainingNextLevelNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100"
+                    android:text="N:"
+                    android:textAlignment="textEnd"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="24sp" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/trainingNextLevelContents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="300"
+                    android:text="Q --.-"
+                    android:textAlignment="center"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="4dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
