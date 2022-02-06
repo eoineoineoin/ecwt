@@ -1,0 +1,1 @@
+Utilisez la méthode de Koch pour apprendre le morse. À chaque session, l’application jouera une suite aléatoire de caractères en morse, votre score dépendra de votre capacité à les retranscrire. La première leçon commence avec deux lettres, une nouvelle est ajoutée à chaque leçon.
