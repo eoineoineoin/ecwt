@@ -1,6 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">MorseTrainer</string>
-
     <string name="sounder_activity_label">Sounder</string>
     <string name="level_select_activity_label">Select Lesson</string>
     <string name="training_activity_label">Training Session</string>
@@ -54,24 +53,4 @@
         scored. Once you can reliably identify 90% of the characters in a lesson, it might be time
         to move on to the next character.
     </string>
-
-    <string-array name="tone_frequency_strings">
-        <item>400Hz</item>
-        <item>450Hz</item>
-        <item>500Hz</item>
-        <item>550Hz</item>
-        <item>600Hz</item>
-        <item>650Hz</item>
-        <item>700Hz</item>
-    </string-array>
-
-    <string-array name="tone_frequency_values">
-        <item>400</item>
-        <item>450</item>
-        <item>500</item>
-        <item>550</item>
-        <item>600</item>
-        <item>650</item>
-        <item>700</item>
-    </string-array>
 </resources>
