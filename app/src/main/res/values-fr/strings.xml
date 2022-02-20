@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sounder_activity_label">Télégraphe</string>
+    <string name="level_select_activity_label">Sélection de leçon</string>
+    <string name="training_activity_label">Session d’entrainement</string>
+    <string name="training_results_activity_label">Résultats de la session</string>
+    <string name="settings_activity_label">Options</string>
+    <string name="about_activity_label">À propos</string>
+
+    <string name="sounder_button_label">Télégraphe</string>
+    <string name="training_button_label">Entrainement Koch</string>
+    <string name="settings_button_label">Options</string>
+    <string name="about_button_label">À propos</string>
+    <string name="retry_training_button_label">Réessayez</string>
+    <string name="next_training_button_label">Ajouter un caractère</string>
+    <string name="start_training_button_label">Touchez pour commencer</string>
+    <string name="setting_tone_frequency_label">Fréquence du son</string>
+    <string name="setting_wpm_label">Mots par minute</string>
+    <string name="setting_wpm_summary">Controle la vitesse des caractères</string>
+    <string name="setting_effective_wpm_label">Mots par minute réel</string>
+    <string name="setting_effective_wpm_summary">Permet des espaces plus longs entre les caractères</string>
+
+    <string name="setting_tone_key">sender_tone</string>
+    <string name="setting_wpm_key">sender_wpm</string>
+    <string name="setting_effective_wpm_key">sender_effective_wpm</string>
+    <string name="setting_last_lesson_key">last_lesson_index</string>
+    <string name="setting_koch_lesson_length_key">koch_lesson_length</string>
+    <string name="setting_koch_lesson_vary_word_size_key">koch_lesson_vary_word_size</string>
+    <string name="setting_koch_lesson_train_new_more">koch_lesson_train_new</string>
+
+    <string name="training_results_summary">Score : %d%%\nErreurs : %d</string>
+    <string name="training_results_error">Error : Entrée manquante</string>
+    <string name="settings_sender_heading">Envoyeur</string>
+    <string name="settings_koch_heading">@string/training_button_label</string>
+    <string name="setting_koch_lesson_length_label">Minutes par session</string>
+    <string name="setting_koch_lesson_vary_label">Durée de groupe variable</string>
+    <string name="setting_koch_lesson_vary_off">Toujours des groupes de 5</string>
+    <string name="setting_koch_lesson_vary_on">Groupes entre 2 et 6 caractères</string>
+    <string name="setting_koch_lesson_train_new_label">Utiliser les nouvelles lettres plus fréquemment</string>
+    <string name="setting_koch_lesson_train_new_on">Les nouvelles lettres sont plus fréquentes</string>
+    <string name="setting_koch_lesson_train_new_off">Toutes les lettres ont le même taux d’apparition</string>
+    <string name="training_results_next_lesson_heading">Commencer la prochaine leçon :</string>
+    <string name="about_heading">À propos</string>
+    <string name="about_feedback_heading">Donner son avis</string>
+    <string name="about_feedback_text">Tous les avis et retours sont appréciés. Partagez votre amour à ecwt@eoinrul.es</string>
+    <string name="about_method_text">Cette application se base sur la méthode de Koch pour l’apprentissage du morse. Chaque caractère est émis à la vitesse d’une transmission normale mais sont introduits lentement, de manière à aider à se familiariser avec chacun d’eux.\n\nLa première leçon commence avec deux caractères et chaque nouvelle leçon en introduit un nouveau. Votre tâche consiste à les écouter et les retranscrire. Une fois la leçon terminée, il vous sera donné un résumé de vos performances. Un score de 99 % indique qu’il est temps de passer à la leçon suivante.
+    </string>
+</resources>
