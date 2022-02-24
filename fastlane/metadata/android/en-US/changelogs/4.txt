@@ -1,0 +1,4 @@
+Show a post-lesson summary to compare sent/received text.
+Improved visual style throughout app.
+Fixed occasional popping audio.
+Fix bug where keyboard didn't appear in Sounder in new Android versions.
