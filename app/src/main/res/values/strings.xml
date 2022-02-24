@@ -21,13 +21,13 @@
     <string name="setting_effective_wpm_label">Effective Words per Minute</string>
     <string name="setting_effective_wpm_summary">Allows extra spacing between characters</string>
 
-    <string name="setting_tone_key">sender_tone</string>
-    <string name="setting_wpm_key">sender_wpm</string>
-    <string name="setting_effective_wpm_key">sender_effective_wpm</string>
-    <string name="setting_last_lesson_key">last_lesson_index</string>
-    <string name="setting_koch_lesson_length_key">koch_lesson_length</string>
-    <string name="setting_koch_lesson_vary_word_size_key">koch_lesson_vary_word_size</string>
-    <string name="setting_koch_lesson_train_new_more">koch_lesson_train_new</string>
+    <string name="setting_tone_key" translatable="false">sender_tone</string>
+    <string name="setting_wpm_key" translatable="false">sender_wpm</string>
+    <string name="setting_effective_wpm_key" translatable="false">sender_effective_wpm</string>
+    <string name="setting_last_lesson_key" translatable="false">last_lesson_index</string>
+    <string name="setting_koch_lesson_length_key" translatable="false">koch_lesson_length</string>
+    <string name="setting_koch_lesson_vary_word_size_key" translatable="false">koch_lesson_vary_word_size</string>
+    <string name="setting_koch_lesson_train_new_more" translatable="false">koch_lesson_train_new</string>
 
     <string name="training_results_summary">Score: %d%%\nMistakes: %d</string>
     <string name="training_results_error">Error: No input?</string>

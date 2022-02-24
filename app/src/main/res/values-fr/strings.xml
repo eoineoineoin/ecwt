@@ -20,14 +20,6 @@
     <string name="setting_effective_wpm_label">Mots par minute réel</string>
     <string name="setting_effective_wpm_summary">Permet des espaces plus longs entre les caractères</string>
 
-    <string name="setting_tone_key">sender_tone</string>
-    <string name="setting_wpm_key">sender_wpm</string>
-    <string name="setting_effective_wpm_key">sender_effective_wpm</string>
-    <string name="setting_last_lesson_key">last_lesson_index</string>
-    <string name="setting_koch_lesson_length_key">koch_lesson_length</string>
-    <string name="setting_koch_lesson_vary_word_size_key">koch_lesson_vary_word_size</string>
-    <string name="setting_koch_lesson_train_new_more">koch_lesson_train_new</string>
-
     <string name="training_results_summary">Score : %d%%\nErreurs : %d</string>
     <string name="training_results_error">Error : Entrée manquante</string>
     <string name="settings_sender_heading">Envoyeur</string>
