@@ -33,6 +33,15 @@ class SounderActivity : AppCompatActivity() {
         onTextEntered("E"); // Display and sound something - this is arbitrary
     }
 
+    // This will be called for connected USB/Bluetooth keyboards:
+    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+        val sequence = KeycodeToSoundSequence(keyCode)
+        mTextViewTest?.text = SequenceToString(sequence)
+        mSoundPlayer?.enqueue(sequence)
+        mKeyboardInput?.setText("") // Should be empty due to physical keyboard
+        return true;
+    }
+
     override fun onResume() {
         super.onResume()
         initSoundPlayer()
@@ -69,7 +78,8 @@ class SounderActivity : AppCompatActivity() {
 
     private var mSoundPlayer : DitDahSoundStream? = null;
 
-    // Utility to watch our EditText and handle any user input:
+    // Utility to watch our EditText and handle any user input
+    // This only seems to get triggered if we're using the software keyboard
     private val mInputHandler = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             if(s == null) {

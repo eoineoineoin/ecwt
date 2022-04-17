@@ -1,0 +1,1 @@
+Fixed a bug where Bluetooth/USB keyboards wouldn't work in sounder mode.
