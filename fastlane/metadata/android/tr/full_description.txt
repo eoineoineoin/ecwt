@@ -1,0 +1,1 @@
+Koch yöntemini kullanarak mors alfabesini öğrenin. Bu uygulama, her oturumunuzda size rastgele mors kodunda karakterler çalacaktır ve çevirinizin doğruluğuna göre size puan verecektir. İlk ders sadece iki harf ile başlanır ve her yeni oturumda fazladan bir karakter eklenir.

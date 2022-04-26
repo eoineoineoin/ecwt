@@ -1,0 +1,66 @@
+<resources>
+    <string name="sounder_activity_label">Ses Yapıcı</string>
+    <string name="level_select_activity_label">Ders Seç</string>
+    <string name="training_activity_label">Alıştırma Oturumu</string>
+    <string name="training_results_activity_label">Ders Sonuçları</string>
+    <string name="settings_activity_label">Ayarlar</string>
+    <string name="about_activity_label">Hakkında</string>
+
+    <string name="sounder_button_label">Ses Yapıcı</string>
+    <string name="training_button_label">Koch Alıştırması</string>
+    <string name="settings_button_label">Ayarlar</string>
+    <string name="about_button_label">Hakkında</string>
+    <string name="retry_training_button_label">Tekrar Dene</string>
+    <string name="next_training_button_label">Bir karakter ekle</string>
+    <string name="start_training_button_label">Başlamak için Dokun</string>
+    <string name="setting_tone_frequency_label">Ton Frekansı</string>
+    <string name="setting_wpm_label">Bir dakikadaki kelime sayısı</string>
+    <string name="setting_wpm_summary">Her bir karakterin gönderildiği hızı belirler</string>
+    <string name="setting_effective_wpm_label">Bir dakikadaki etkili kelime sayısı</string>
+    <string name="setting_effective_wpm_summary">Karakterler arası fazladan boşluğu belirler</string>
+
+    <string name="training_results_summary">Puan: %d%%\nYanlış: %d</string>
+    <string name="training_results_error">Hata: Girdi yok?</string>
+    <string name="settings_sender_heading">Gönderici</string>
+    <string name="settings_koch_heading">@string/training_button_label</string>
+    <string name="setting_koch_lesson_length_label">Her bir ders için verilecek dakika</string>
+    <string name="setting_koch_lesson_vary_label">Değişken kelime grubu uzunluğu</string>
+    <string name="setting_koch_lesson_vary_off">Her zaman 5 karakterlik gruplar</string>
+    <string name="setting_koch_lesson_vary_on">2 ila 6 karakter arasında gruplar</string>
+    <string name="setting_koch_lesson_train_new_label">Yeni harfleri daha sık kullan</string>
+    <string name="setting_koch_lesson_train_new_on">Yeni harfler daha sık kullanılır</string>
+    <string name="setting_koch_lesson_train_new_off">Tüm harflerin gelme oranı aynı olur</string>
+    <string name="training_results_next_lesson_heading">Sonraki derse başla:</string>
+    <string name="about_heading">Uygulama Hakkında</string>
+    <string name="about_feedback_heading">Geri Bildirim</string>
+    <string name="about_feedback_text">Her türlü geri dönüşünüz makbule geçer. Sevgilerinizi ve yorumlarınızı iletebilirsiniz: ecwt@eoinrul.es </string>
+    <string name="about_method_text">Bu uygulama Koch yöntemi ile morse alfabesini öğretmektedir.
+        Bu yöntemde, her bir karakter normal bir iletişimde olacağı şekilde dinletilir ancak
+        karakterler yavaşça tanıtılır. Bu şekilde her bir karakterin nasıl seslere sahip olduğuna
+        dair aşinalık edinmeniz sağlanır.\n\nİlk ders iki karakter ile başlar ve sonradan gelen 
+        her ders yeni bir karakteri beraberinde getirir. Göreviniz size iletilen sesleri dinleyip
+        onları yazıya çevirmektir. Ders bittiğinde skorunuzun ne kadar iyi olduğuna dair bir özet
+        ile karşılanırsınız. Bir derste karakterlerin %90'ını hatasız biçimde tanımlayabildiğinizde
+        bir sonraki karaktere geçmenizin zamanı gelmiş demektir.
+    </string>
+
+    <string-array name="tone_frequency_strings">
+        <item>400Hz</item>
+        <item>450Hz</item>
+        <item>500Hz</item>
+        <item>550Hz</item>
+        <item>600Hz</item>
+        <item>650Hz</item>
+        <item>700Hz</item>
+    </string-array>
+
+    <string-array name="tone_frequency_values">
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+        <item>550</item>
+        <item>600</item>
+        <item>650</item>
+        <item>700</item>
+    </string-array>
+</resources>
