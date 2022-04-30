@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Some combination of the widgets I'm using prevent elevation
+        from casting a visible border in dark mode, so just change
+        the background to distinguish this widget: -->
+    <color name="lesson_select_background">#1E1C1E</color>
+
+    <color name="colorResultDetailCorrect">#4CAF50</color>
+    <color name="colorResultDetailIncorrect">#FF5722</color>
+</resources>

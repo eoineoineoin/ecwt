@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#ec2a84</color>
+    <color name="colorPrimaryDark">#ec2a84</color>
+    <color name="colorAccent">#c14780</color>
+
     <color name="lesson_select_background">#FFFFFF</color>
+
+    <color name="colorTextLink">#313896</color>
 
     <color name="colorResultDetailCorrect">#33691E</color>
     <color name="colorResultDetailIncorrect">#8C1C03</color>
