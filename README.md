@@ -14,4 +14,5 @@ An application for Android to teach morse code using the Koch method.
 These cool people also helped out:
 
 [Le-jun](https://github.com/le-jun) added the French translations.
+
 [dybdeskarphet](https://github.com/dybdeskarphet) added the Turkish translations.
