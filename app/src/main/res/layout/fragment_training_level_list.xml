@@ -9,6 +9,7 @@
     android:layout_gravity="center_horizontal"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:outlineProvider="background"
     app:layoutManager="LinearLayoutManager"
     tools:context="es.eoinrul.ecwt.TrainingLevelFragment"
     tools:listitem="@layout/fragment_training_level" />

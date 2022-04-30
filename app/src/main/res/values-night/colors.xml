@@ -3,7 +3,7 @@
     <!-- Some combination of the widgets I'm using prevent elevation
         from casting a visible border in dark mode, so just change
         the background to distinguish this widget: -->
-    <color name="lesson_select_background">#1E1C1E</color>
+    <color name="lesson_select_background">#424242</color>
 
     <color name="menu_icon_color">#cccccc</color>
     <color name="menu_item_color">#424242</color>

@@ -24,6 +24,7 @@
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:onClick="openSounder"
+            android:outlineProvider="background"
             android:paddingBottom="20dp"
             app:cardCornerRadius="4dp">
 
