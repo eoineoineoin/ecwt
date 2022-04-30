@@ -5,6 +5,9 @@
         the background to distinguish this widget: -->
     <color name="lesson_select_background">#1E1C1E</color>
 
+    <color name="menu_icon_color">#cccccc</color>
+    <color name="menu_item_color">#424242</color>
+
     <color name="colorResultDetailCorrect">#4CAF50</color>
     <color name="colorResultDetailIncorrect">#FF5722</color>
 </resources>

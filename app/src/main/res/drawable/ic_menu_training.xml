@@ -8,8 +8,8 @@
       android:strokeAlpha="1"
       android:strokeLineJoin="round"
       android:strokeWidth="0.45890903"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"
       android:strokeLineCap="round"/>
   <path
@@ -17,8 +17,8 @@
       android:strokeAlpha="1"
       android:strokeLineJoin="round"
       android:strokeWidth="0.45890903"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"
       android:strokeLineCap="round"/>
   <path
@@ -26,8 +26,8 @@
       android:strokeAlpha="1"
       android:strokeLineJoin="round"
       android:strokeWidth="1.14727259"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"
       android:strokeLineCap="butt"/>
 </vector>

@@ -4,7 +4,9 @@
     <color name="colorPrimaryDark">#ec2a84</color>
     <color name="colorAccent">#c14780</color>
 
-    <color name="lesson_select_background">#FFFFFF</color>
+    <color name="lesson_select_background">#ffffff</color>
+    <color name="menu_item_color">#ffffff</color>
+    <color name="menu_icon_color">#4d4d4d</color>
 
     <color name="colorTextLink">#313896</color>
 

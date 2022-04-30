@@ -7,14 +7,14 @@
       android:pathData="M4.2058,17.9984L19.7312,17.9984A0.339,0.339 0,0 1,20.0702 18.3374L20.0702,23.4166A0.339,0.339 0,0 1,19.7312 23.7556L4.2058,23.7556A0.339,0.339 0,0 1,3.8668 23.4166L3.8668,18.3374A0.339,0.339 0,0 1,4.2058 17.9984z"
       android:strokeAlpha="1"
       android:strokeWidth="2.13499999"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"/>
   <path
       android:pathData="M22.0066,10.6286L27.6504,10.6286A0.5379,0.5379 0,0 1,28.1883 11.1665L28.1883,12.8987A0.5379,0.5379 0,0 1,27.6504 13.4365L22.0066,13.4365A0.5379,0.5379 0,0 1,21.4688 12.8987L21.4688,11.1665A0.5379,0.5379 0,0 1,22.0066 10.6286z"
       android:strokeAlpha="1"
       android:strokeWidth="2.13499999"
-      android:fillColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
       android:strokeColor="#00000000"
       android:fillAlpha="1"/>
   <path
@@ -22,8 +22,8 @@
       android:strokeAlpha="1"
       android:strokeLineJoin="round"
       android:strokeWidth="0.40000001"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"
       android:strokeLineCap="butt"/>
   <path
@@ -32,15 +32,15 @@
       android:strokeLineJoin="round"
       android:strokeWidth="1.79999995"
       android:fillColor="#00000000"
-      android:strokeColor="#4d4d4d"
+      android:strokeColor="@color/menu_icon_color"
       android:strokeLineCap="round"/>
   <path
       android:pathData="M6.7913,10.801L7.9916,10.801A0.5379,0.5379 0,0 1,8.5295 11.3389L8.5295,18.3728A0.5379,0.5379 0,0 1,7.9916 18.9107L6.7913,18.9107A0.5379,0.5379 0,0 1,6.2535 18.3728L6.2535,11.3389A0.5379,0.5379 0,0 1,6.7913 10.801z"
       android:strokeAlpha="1"
       android:strokeLineJoin="round"
       android:strokeWidth="0.2"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"
       android:strokeLineCap="round"/>
   <path
@@ -48,8 +48,8 @@
       android:strokeAlpha="1"
       android:strokeLineJoin="round"
       android:strokeWidth="0.24183567"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"
       android:strokeLineCap="round"/>
   <path
@@ -57,8 +57,8 @@
       android:strokeAlpha="1"
       android:strokeLineJoin="round"
       android:strokeWidth="0.22665158"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"
       android:strokeLineCap="round"/>
   <path
@@ -66,8 +66,8 @@
       android:strokeAlpha="1"
       android:strokeLineJoin="round"
       android:strokeWidth="0.40000001"
-      android:fillColor="#4d4d4d"
-      android:strokeColor="#4d4d4d"
+      android:fillColor="@color/menu_icon_color"
+      android:strokeColor="@color/menu_icon_color"
       android:fillAlpha="1"
       android:strokeLineCap="butt"/>
 </vector>
