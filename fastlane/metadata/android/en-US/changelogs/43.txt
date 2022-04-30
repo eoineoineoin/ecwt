@@ -1,0 +1,2 @@
+Added Turkish translations
+Make app follow system dark theme setting
