@@ -312,53 +312,6 @@ fun SequenceToString(sequence: List<SoundTypes>) : String {
     return ret
 }
 
-// Almost certainly the wrong way to do this
-fun KeycodeToSoundSequence(keycode : Int) : List<SoundTypes> {
-    return when(keycode) {
-        KeyEvent.KEYCODE_A -> StringToSoundSequence("A");
-        KeyEvent.KEYCODE_B -> StringToSoundSequence("B");
-        KeyEvent.KEYCODE_C -> StringToSoundSequence("C");
-        KeyEvent.KEYCODE_D -> StringToSoundSequence("D");
-        KeyEvent.KEYCODE_E -> StringToSoundSequence("E");
-        KeyEvent.KEYCODE_F -> StringToSoundSequence("F");
-        KeyEvent.KEYCODE_G -> StringToSoundSequence("G");
-        KeyEvent.KEYCODE_H -> StringToSoundSequence("H");
-        KeyEvent.KEYCODE_I -> StringToSoundSequence("I");
-        KeyEvent.KEYCODE_J -> StringToSoundSequence("J");
-        KeyEvent.KEYCODE_K -> StringToSoundSequence("K");
-        KeyEvent.KEYCODE_L -> StringToSoundSequence("L");
-        KeyEvent.KEYCODE_M -> StringToSoundSequence("M");
-        KeyEvent.KEYCODE_N -> StringToSoundSequence("N");
-        KeyEvent.KEYCODE_O -> StringToSoundSequence("O");
-        KeyEvent.KEYCODE_P -> StringToSoundSequence("P");
-        KeyEvent.KEYCODE_Q -> StringToSoundSequence("Q");
-        KeyEvent.KEYCODE_R -> StringToSoundSequence("R");
-        KeyEvent.KEYCODE_S -> StringToSoundSequence("S");
-        KeyEvent.KEYCODE_T -> StringToSoundSequence("T");
-        KeyEvent.KEYCODE_U -> StringToSoundSequence("U");
-        KeyEvent.KEYCODE_V -> StringToSoundSequence("V");
-        KeyEvent.KEYCODE_W -> StringToSoundSequence("W");
-        KeyEvent.KEYCODE_X -> StringToSoundSequence("X");
-        KeyEvent.KEYCODE_Y -> StringToSoundSequence("Y");
-        KeyEvent.KEYCODE_Z -> StringToSoundSequence("Z");
-        KeyEvent.KEYCODE_0 -> StringToSoundSequence("0");
-        KeyEvent.KEYCODE_1 -> StringToSoundSequence("1");
-        KeyEvent.KEYCODE_2 -> StringToSoundSequence("2");
-        KeyEvent.KEYCODE_3 -> StringToSoundSequence("3");
-        KeyEvent.KEYCODE_4 -> StringToSoundSequence("4");
-        KeyEvent.KEYCODE_5 -> StringToSoundSequence("5");
-        KeyEvent.KEYCODE_6 -> StringToSoundSequence("6");
-        KeyEvent.KEYCODE_7 -> StringToSoundSequence("7");
-        KeyEvent.KEYCODE_8 -> StringToSoundSequence("8");
-        KeyEvent.KEYCODE_9 -> StringToSoundSequence("9");
-        KeyEvent.KEYCODE_PERIOD -> StringToSoundSequence(".");
-        //KeyEvent.KEYCODE_S -> StringToSoundSequence("?");
-        else -> {
-            StringToSoundSequence(" ")
-        }
-    }
-}
-
 data class DitDahGeneratorSettings(var context : Context? = null) {
     //TODO These values are duplicated in the settings fragment
     var toneFrequency = 650

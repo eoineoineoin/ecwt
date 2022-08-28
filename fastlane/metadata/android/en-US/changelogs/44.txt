@@ -1,2 +1,3 @@
 Fixed bug where duration of lessons was too long
 Added tip if users didn't add spaces to lesson input
+Improved "Sounder" UI. Now shows some history and upcoming text.
