@@ -55,6 +55,7 @@
         to move on to the next character.
     </string>
     <string name="add_spaces_tip">Be sure to add spaces between the words!</string>
+    <string name="auto_send">Auto send</string>
 
     <string-array name="tone_frequency_strings">
         <item>400Hz</item>

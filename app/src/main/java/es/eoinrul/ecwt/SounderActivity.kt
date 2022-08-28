@@ -3,6 +3,11 @@ package es.eoinrul.ecwt
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +29,21 @@ class SounderActivity : AppCompatActivity(), DitDahSoundStream.StreamNotificatio
         mKeyboardInput = findViewById<EditText>(R.id.sounderInput)
         mKeyboardInput?.addTextChangedListener(mInputHandler)
         mKeyboardInput?.requestFocus()
+        mKeyboardInput?.setOnEditorActionListener { textView, actionId, keyEvent ->
+            if(!mAutoSend && (actionId == EditorInfo.IME_ACTION_SEND ||
+                        (actionId == EditorInfo.IME_NULL && keyEvent.keyCode == KeyEvent.KEYCODE_ENTER) ) ) {
+                mUserTriggeredSend = true
+                mKeyboardInput!!.isEnabled = false
+                ensurePlaying()
+            }
+            mAutoSend
+        }
+
+        var autoSendCheck = findViewById<CheckBox>(R.id.autoSendCheck);
+        autoSendCheck.setOnCheckedChangeListener { compoundButton, _ ->
+            mAutoSend = compoundButton.isChecked
+        }
+        autoSendCheck.isChecked = mAutoSend
 
         initSoundPlayer()
     }
@@ -47,6 +67,8 @@ class SounderActivity : AppCompatActivity(), DitDahSoundStream.StreamNotificatio
         mSpaceDurationMs = (mSoundPlayer!!.durationOf(listOf(SoundTypes.LETTER_SPACE)) * 1000).toLong()
     }
 
+    private var mAutoSend : Boolean = true
+    private var mUserTriggeredSend : Boolean = false
     private var mPreviouslySentText : TextView? = null
     private var mCurrentlySendingText : TextView? = null
     private var mKeyboardInput : EditText? = null
@@ -87,7 +109,8 @@ class SounderActivity : AppCompatActivity(), DitDahSoundStream.StreamNotificatio
 
         mSoundAwaitingText = true
         runOnUiThread {
-            if( mKeyboardInput?.text!!.isNotEmpty() && mSoundAwaitingText ) {
+            if( (mAutoSend || mUserTriggeredSend) &&
+                mKeyboardInput?.text!!.isNotEmpty() && mSoundAwaitingText ) {
                 mSoundAwaitingText = false
                 // Extract and remove the first character
                 val firstInput = mKeyboardInput!!.text!!.subSequence(0, 1).toString()
@@ -111,6 +134,13 @@ class SounderActivity : AppCompatActivity(), DitDahSoundStream.StreamNotificatio
                         - extraSpace.length - firstInput.length)
                 mPreviouslySentText?.text = mPreviouslySentText?.text!!.substring(trimFrom,
                     mPreviouslySentText?.text!!.length) + extraSpace + firstInput
+
+                // Re-enable the send button if this was the last character to go
+                if (mUserTriggeredSend && mKeyboardInput!!.text.isEmpty()) {
+                    mKeyboardInput!!.isEnabled = true
+                    mKeyboardInput!!.requestFocus()
+                    mUserTriggeredSend = false
+                }
 
                 //  Then play the sound:
                 mSoundPlayer?.enqueue(sequence)
