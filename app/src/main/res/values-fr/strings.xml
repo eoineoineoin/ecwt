@@ -37,4 +37,6 @@
     <string name="about_feedback_text">Tous les avis et retours sont appréciés. Partagez votre amour à ecwt@eoinrul.es</string>
     <string name="about_method_text">Cette application se base sur la méthode de Koch pour l’apprentissage du morse. Chaque caractère est émis à la vitesse d’une transmission normale mais sont introduits lentement, de manière à aider à se familiariser avec chacun d’eux.\n\nLa première leçon commence avec deux caractères et chaque nouvelle leçon en introduit un nouveau. Votre tâche consiste à les écouter et les retranscrire. Une fois la leçon terminée, il vous sera donné un résumé de vos performances. Un score de 99 % indique qu’il est temps de passer à la leçon suivante.
     </string>
+    <string name="auto_send">Envoi automatique</string>
+    <string name="add_spaces_tip">Assurez-vous d\'ajouter des espaces entre les mots!</string>
 </resources>

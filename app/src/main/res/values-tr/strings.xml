@@ -43,24 +43,6 @@
         ile karşılanırsınız. Bir derste karakterlerin %90\'ını hatasız biçimde tanımlayabildiğinizde
         bir sonraki karaktere geçmenizin zamanı gelmiş demektir.
     </string>
-
-    <string-array name="tone_frequency_strings">
-        <item>400Hz</item>
-        <item>450Hz</item>
-        <item>500Hz</item>
-        <item>550Hz</item>
-        <item>600Hz</item>
-        <item>650Hz</item>
-        <item>700Hz</item>
-    </string-array>
-
-    <string-array name="tone_frequency_values">
-        <item>400</item>
-        <item>450</item>
-        <item>500</item>
-        <item>550</item>
-        <item>600</item>
-        <item>650</item>
-        <item>700</item>
-    </string-array>
+    <string name="auto_send">Otomatik gönder</string>
+    <string name="add_spaces_tip">Kelimelerin arasına boşluk eklediğinizden emin olun!</string>
 </resources>
