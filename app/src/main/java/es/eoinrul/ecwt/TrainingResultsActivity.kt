@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
 
 class TrainingResultsActivity : AppCompatActivity() {
 
@@ -67,6 +69,10 @@ class TrainingResultsActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.resultSummary).text = getString(R.string.training_results_summary, percentCorrect, editDistance)
+
+        // Add extra feedback if the user didn't add any spaces
+        var userAddedSpaces = userInputText.indexOf(' ') != -1
+        findViewById<LinearLayout>(R.id.spacesHelpContainer).isVisible = !userAddedSpaces
 
         var detailContainer = findViewById<TextView>(R.id.resultDetails)
         detailContainer.text = HtmlCompat.fromHtml(formatEditDetails(comparisonResult.mEdits), 0)

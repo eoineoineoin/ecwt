@@ -21,6 +21,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/spacesHelpContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:drawable/editbox_background"
+            android:backgroundTint="?attr/colorError"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingTop="6dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resultSummary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="⚠"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_spaces_tip"
+                android:textSize="24sp" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/resultDetails"
             android:layout_width="match_parent"
@@ -32,7 +62,7 @@
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/resultSummary" />
+            app:layout_constraintTop_toBottomOf="@+id/spacesHelpContainer" />
 
 
         <Button
@@ -63,11 +93,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button">
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="4dp" />
 
             <TextView
                 android:id="@+id/textView"
@@ -109,11 +134,6 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="24sp" />
             </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="4dp" />
 
         </LinearLayout>
 

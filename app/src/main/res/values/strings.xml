@@ -54,6 +54,7 @@
         scored. Once you can reliably identify 90% of the characters in a lesson, it might be time
         to move on to the next character.
     </string>
+    <string name="add_spaces_tip">Be sure to add spaces between the words!</string>
 
     <string-array name="tone_frequency_strings">
         <item>400Hz</item>
