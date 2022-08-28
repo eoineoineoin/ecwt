@@ -414,7 +414,7 @@ class DitDahSoundStream {
         // Apply an attack and release envelope to each of the samples to avoid a pop
         // in the audio that's generated. Empirically, 8ms seems to eliminate it while
         // still being fast enough that it works on the fastest WPM setting:
-        var attackReleaseDuration = 0.008f;
+        val attackReleaseDuration = 0.008f;
         val attackReleaseTimeInSamples = (attackReleaseDuration * mAudioSampleRate).toInt();
         for(i in 0 until attackReleaseTimeInSamples) {
             val frac = i.toFloat() / attackReleaseTimeInSamples.toFloat();
@@ -434,6 +434,21 @@ class DitDahSoundStream {
         for(sym in symbols) {
             mSymbolQueue.put(sym)
         }
+    }
+
+    // Returns the duration of the sequence, in seconds
+    fun durationOf(symbols : List<SoundTypes>): Float {
+        var numSamples = 0
+        for(sym in symbols) {
+            numSamples += when(sym) {
+                SoundTypes.DIT -> mDitSound
+                SoundTypes.DAH -> mDahSound
+                SoundTypes.LETTER_SPACE -> mCharacterSpacingSound
+                SoundTypes.WORD_SPACE -> mWordSpacingSound
+            }.size
+        }
+
+        return numSamples.toFloat() / mAudioSampleRate.toFloat();
     }
 
     fun quit() {

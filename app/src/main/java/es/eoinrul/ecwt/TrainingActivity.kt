@@ -79,8 +79,6 @@ class TrainingActivity : AppCompatActivity(),
         if(mLessonStarted)
             return
 
-         val generatorSettings = DitDahGeneratorSettings()
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
         val lessonLengthInMinutes = sharedPreferences.getInt(getString(R.string.setting_koch_lesson_length_key), 1)
@@ -93,12 +91,12 @@ class TrainingActivity : AppCompatActivity(),
 
         var sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
         val shortLessonDebug = sharedPrefs.getBoolean("debug_override_lesson_length", false)
-        val numberOfWords = if(shortLessonDebug) {
+        val lessonDurationS = if(shortLessonDebug) {
             // This makes it much faster to test functionality, if enabled in preferences
-            2
+            15
         } else {
             // This is only an approximation
-            generatorSettings.farnsworthWordsPerMinute * lessonLengthInMinutes
+            lessonLengthInMinutes * 60
         }
 
         // If selected in preferences, modify the alphabet used for the lesson so that
@@ -117,7 +115,7 @@ class TrainingActivity : AppCompatActivity(),
         // Create the actual text used for the lesson
         var lessonText = String()
         var rng = Random.Default
-        for(i in 0 until numberOfWords) {
+        while(mSoundPlayer!!.durationOf(StringToSoundSequence(lessonText)) < lessonDurationS) {
             val thisWordSize = rng.nextInt(minWordSize, maxWordSize + 1)
             for(c in 0 until thisWordSize) {
                 val randomLetterIndex = rng.nextInt(0, lessonAlphabet.length)
