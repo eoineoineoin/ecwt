@@ -79,7 +79,7 @@ class TrainingResultsActivity : AppCompatActivity() {
     }
 
     private fun formatColorId(c : Int) : String {
-        return "<font color=\"#" + Integer.toHexString(getColor(c)).substring(2) + "\">"
+        return "<font face=monospace color=\"#" + Integer.toHexString(getColor(c)).substring(2) + "\">"
     }
 
     private fun formatEditDetails(edits : List<SingleEdit>) : String {
