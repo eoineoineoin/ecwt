@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.media.AudioAttributes
 import android.media.AudioFormat
+import android.media.AudioManager
 import android.media.AudioTrack
+import android.os.Build
 import android.view.KeyEvent
 import androidx.preference.PreferenceManager
 import java.util.concurrent.ArrayBlockingQueue
@@ -458,12 +460,20 @@ class DitDahSoundStream {
             mSoundPlayer.play();
 
             if (numWritten != soundToWrite.size) {
-                mSoundPlayer.write(
-                    soundToWrite,
-                    numWritten,
-                    soundToWrite.size - numWritten,
-                    AudioTrack.WRITE_BLOCKING
-                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mSoundPlayer.write(
+                        soundToWrite,
+                        numWritten,
+                        soundToWrite.size - numWritten,
+                        AudioTrack.WRITE_BLOCKING
+                    )
+                } else {
+                    mSoundPlayer.write(
+                        soundToWrite,
+                        numWritten,
+                        soundToWrite.size - numWritten
+                    )
+                }
             }
 
             // Now we can stop the audio player; it won't stop the audio
@@ -490,21 +500,31 @@ class DitDahSoundStream {
     private val mCharacterSpacingSound : ShortArray;
 
     // Our actual audio track
-    private val mSoundPlayer : AudioTrack = AudioTrack.Builder()
-        .setAudioAttributes(
-            AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build()
-        )
-        .setAudioFormat(
-            AudioFormat.Builder()
-                .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
-                .setSampleRate(mAudioSampleRate)
-                .setChannelMask(AudioFormat.CHANNEL_OUT_MONO)
-                .build()
-        )
-        .setTransferMode(AudioTrack.MODE_STREAM)
-        .setBufferSizeInBytes(mAudioSampleRate)
-        .build();
+    private val mSoundPlayer : AudioTrack = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        AudioTrack.Builder()
+            .setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build()
+            )
+            .setAudioFormat(
+                AudioFormat.Builder()
+                    .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                    .setSampleRate(mAudioSampleRate)
+                    .setChannelMask(AudioFormat.CHANNEL_OUT_MONO)
+                    .build()
+            )
+            .setTransferMode(AudioTrack.MODE_STREAM)
+            .setBufferSizeInBytes(mAudioSampleRate)
+            .build()
+    } else {
+        AudioTrack(
+            AudioManager.STREAM_MUSIC,
+            mAudioSampleRate,
+            AudioFormat.CHANNEL_OUT_MONO,
+            AudioFormat.ENCODING_PCM_16BIT,
+            mAudioSampleRate,
+            AudioTrack.MODE_STREAM)
+    }
 }
