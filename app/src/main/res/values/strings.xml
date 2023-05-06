@@ -29,7 +29,7 @@
     <string name="setting_koch_lesson_vary_word_size_key" translatable="false">koch_lesson_vary_word_size</string>
     <string name="setting_koch_lesson_train_new_more" translatable="false">koch_lesson_train_new</string>
 
-    <string name="training_results_summary">Score: %d%%\nMistakes: %d</string>
+    <string name="training_results_summary">Score: %d%% Mistakes: %d</string>
     <string name="training_results_error">Error: No input?</string>
     <string name="settings_sender_heading">Sender</string>
     <string name="settings_koch_heading">@string/training_button_label</string>
@@ -45,15 +45,7 @@
     <string name="about_feedback_heading">Feedback</string>
     <string name="about_feedback_text">Any and all feedback is appreciated. Send your love and
         comments to ecwt@eoinrul.es</string>
-    <string name="about_method_text">This application teaches morse using the Koch method. In this
-        method, each character is sent at the speed you would hear it in a normal transmission but
-        characters are introduced to you slowly. This way, you build up familiarity with what each
-        character sounds like.\n\nThe first lesson starts with two characters and each subsequent
-        lesson introduces a new one. Your task is to listen to the transmitted sounds and transcribe
-        them. Once the lesson ends, you\&apos;ll be presented with a short summary of how well you
-        scored. Once you can reliably identify 90% of the characters in a lesson, it might be time
-        to move on to the next character.
-    </string>
+    <string name="about_method_text">"This application teaches morse using the Koch method. In this         method, each character is sent at the speed you would hear it in a normal transmission but         characters are introduced to you slowly. This way, you build up familiarity with what each         character sounds like.  The first lesson starts with two characters and each subsequent         lesson introduces a new one. Your task is to listen to the transmitted sounds and transcribe         them. Once the lesson ends, you\\&apos;ll be presented with a short summary of how well you         scored. Once you can reliably identify 90% of the characters in a lesson, it might be time         to move on to the next character.     "</string>
     <string name="add_spaces_tip">Be sure to add spaces between the words!</string>
     <string name="auto_send">Auto send</string>
 
