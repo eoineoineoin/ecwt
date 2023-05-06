@@ -278,6 +278,24 @@ fun StringToSoundSequence(s : String) : List<SoundTypes> {
             SoundTypes.DAH,
             SoundTypes.LETTER_SPACE
         )
+        ',' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        ':' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
         '?' -> listOf(
             SoundTypes.DIT,
             SoundTypes.DIT,
@@ -287,9 +305,85 @@ fun StringToSoundSequence(s : String) : List<SoundTypes> {
             SoundTypes.DIT,
             SoundTypes.LETTER_SPACE
         )
+        '\'' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '-' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
         '/' -> listOf(
             SoundTypes.DAH,
             SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '(' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        ')' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '"' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '=' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '+' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.LETTER_SPACE
+        )
+        '×' -> listOf(
+            SoundTypes.DAH,
+            SoundTypes.DIT,
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.LETTER_SPACE
+        )
+        '@' -> listOf(
+            SoundTypes.DIT,
+            SoundTypes.DAH,
+            SoundTypes.DAH,
             SoundTypes.DIT,
             SoundTypes.DAH,
             SoundTypes.DIT,
