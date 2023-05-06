@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "es.eoinrul.ecwt"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 45
         versionName "4.5"
 
