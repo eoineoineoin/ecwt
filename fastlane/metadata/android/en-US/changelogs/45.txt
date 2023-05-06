@@ -1,0 +1,6 @@
+Improved visual display of training results (Thanks, p-davide)
+App now runs on Android 5 (Thanks, p-davide, again)
+Add Italian translation (p-davide, again!)
+Fix bug where sounder would break when entering unknown characters
+Add additional characters specified by ITU morse code
+
