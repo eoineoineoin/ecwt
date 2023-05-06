@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 
@@ -79,7 +80,7 @@ class TrainingResultsActivity : AppCompatActivity() {
     }
 
     private fun formatColorId(c : Int) : String {
-        return "<font face=monospace color=\"#" + Integer.toHexString(getColor(c)).substring(2) + "\">"
+        return "<font face=monospace color=\"#" + Integer.toHexString(ContextCompat.getColor(this, c)).substring(2) + "\">"
     }
 
     private fun formatEditDetails(edits : List<SingleEdit>) : String {
