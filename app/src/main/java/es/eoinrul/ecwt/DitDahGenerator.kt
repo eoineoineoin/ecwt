@@ -295,7 +295,7 @@ fun StringToSoundSequence(s : String) : List<SoundTypes> {
             SoundTypes.DIT,
             SoundTypes.LETTER_SPACE
         )
-        else -> { listOf() }
+        else -> { listOf(SoundTypes.LETTER_SPACE) }
     }
 
     return first + StringToSoundSequence(s.substring(1));
