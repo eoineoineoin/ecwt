@@ -3,6 +3,19 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/tmp/morsetrainer.keystore')
+            keyAlias 'key0'
+            keyPassword 'aaappp01'
+            storePassword 'aaappp01'
+        }
+        release {
+            storeFile file('/tmp/morsetrainer.keystore')
+            keyPassword 'aaappp01'
+            keyAlias 'key0'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
@@ -10,10 +23,11 @@ android {
         applicationId "es.eoinrul.ecwt"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 45
-        versionName "4.5"
+        versionCode 46
+        versionName "4.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
